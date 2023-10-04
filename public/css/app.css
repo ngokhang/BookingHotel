@@ -1,0 +1,197 @@
+@charset "UTF-8";
+:root {
+  --primary-text: #717171;
+  --title-text: #222222;
+  --logo-color: #848484;
+  --border-color: #dddddd;
+}
+
+.grid {
+  /* width: 1360px; */
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 40px;
+  /* tự động căn giữa khối này trong khối khác*/
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  background-color: #fff;
+  font-size: 62.5%;
+  line-height: 1.6rem;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--title-text);
+}
+
+header {
+  width: 100%;
+  height: 80px;
+  border-bottom: 1px solid #ebebeb;
+  display: flex;
+  align-items: center;
+  background-color: #c2dff1;
+  /* justify-content: space-between; */
+}
+
+.header-logo {
+  flex-basis: 33.33%;
+  display: flex;
+  align-items: center;
+}
+
+.header-search {
+  flex-basis: 33.33%;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  background-color: #fff;
+  border-radius: 45px;
+}
+
+.header-search-list {
+  padding-left: 0 8px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  font-size: 1rem;
+  border-radius: 45px;
+}
+
+.header-search-item {
+  position: relative;
+  min-width: 150px;
+  height: 30px;
+  display: flex;
+  line-height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 16px;
+  border-right: 1px solid var(--border-color);
+}
+
+.header-search-item:hover {
+  cursor: pointer;
+}
+
+.header-search-item:hover .header-search-city,
+.header-search-item:hover .header-search-price {
+  display: block;
+}
+
+.header-search-item:last-child {
+  border-right: none;
+}
+
+.header-search-item > input {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+.header-search-item > i {
+  padding: 0 8px;
+}
+
+.header-search-city,
+.header-search-price {
+  display: none;
+  position: absolute;
+  font-size: 0.9rem;
+  width: calc(100% + 10px);
+  border-radius: 5px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  top: 140%;
+  left: -16px;
+}
+
+.header-search-city::before,
+.header-search-price::before {
+  position: absolute;
+  content: " ";
+  height: 20px;
+  width: 100%;
+  background-color: transparent;
+  top: -18px;
+  left: 0;
+}
+
+.search-city-item,
+.search-price-item {
+  padding: 8px 16px;
+}
+
+.search-city-item:hover,
+.search-price-item:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+.search-city-list,
+.search-price-list {
+  line-height: 1.8rem;
+}
+
+.header-info {
+  flex-basis: 33.33%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.header-info_web {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.header-info_web > a,
+.header-info_web > i {
+  padding: 8px;
+  border-radius: 45px;
+}
+
+.header-info_web > a:hover,
+.header-info_web > i:hover {
+  background-color: #ccc;
+}
+
+.header-infor-user {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  margin-left: 10px;
+  border-radius: 45px;
+}
+
+.info-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #50b1ee;
+  padding: 5px;
+  border-radius: 45px;
+}
+
+.info-user > i {
+  padding: 0 6px;
+}
+
+.info-user > i:last-child {
+  font-size: 1.5rem;
+}
