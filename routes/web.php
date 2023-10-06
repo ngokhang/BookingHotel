@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\ProfileUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('homepage');
+});
+
+/* Profile user route */
+Route::prefix('account')->group(function () {
+    // Personal info
+    Route::get('/', [ProfileUserController::class, 'edit'])->name('profile.edit');
+    Route::put('/', [ProfileUserController::class, 'update'])->name('profile.update');
+    // Password
+    Route::get('/password', [PasswordController::class, 'edit'])->name('password.edit');
+    Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
 });

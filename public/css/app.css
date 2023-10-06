@@ -1,0 +1,41 @@
+.profile-content .wrapper {
+  margin: 60px 0;
+}
+.profile-content .wrapper .show-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.profile-content .wrapper .show-info .user-avatar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-content .wrapper .show-info .user-avatar img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.profile-content .wrapper .show-info .user-avatar .avatar-mask {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ececec;
+  border-radius: 50%;
+  transition: all 0.25s ease-in;
+  cursor: pointer;
+}
+.profile-content .wrapper .show-info .text .username {
+  font-size: 2rem;
+  line-height: 2rem;
+}
+.profile-content .wrapper .menu-update .menu-update-item:hover > a {
+  color: red;
+  transition: all 0.25s ease-in;
+}
+.profile-content .wrapper .menu-update a.active {
+  color: red;
+}
