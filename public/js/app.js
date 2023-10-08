@@ -2163,6 +2163,7 @@ module.exports = {
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./slider */ "./resources/js/slider.js");
 
 /***/ }),
 
@@ -2199,6 +2200,49 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/slider.js":
+/*!********************************!*\
+  !*** ./resources/js/slider.js ***!
+  \********************************/
+/***/ (() => {
+
+$(function () {
+  $(".hotel-main-item").each(function () {
+    var product = $(this);
+    var index = 0;
+    var numImages = product.find(".hotel-main-img").length;
+    var changeImage = function changeImage() {
+      var images = product.find(".hotel-main-img");
+      images.hide();
+      images.eq(index).fadeIn(500);
+      product.find(".index-button").removeClass("active");
+      product.find(".index-button").eq(index).addClass("active");
+    };
+    changeImage.call(product); // Gọi hàm chuyển ảnh để hiển thị ảnh đầu tiên của sản phẩm
+
+    product.find(".index-button").click(function () {
+      index = $(this).attr("idx");
+      changeImage.call(product);
+    });
+    product.find(".next").click(function () {
+      index++;
+      if (index >= numImages) {
+        index = 0;
+      }
+      changeImage.call(product);
+    });
+    product.find(".prev").click(function () {
+      index--;
+      if (index < 0) {
+        index = numImages - 1;
+      }
+      changeImage.call(product);
+    });
+  });
+});
 
 /***/ }),
 
