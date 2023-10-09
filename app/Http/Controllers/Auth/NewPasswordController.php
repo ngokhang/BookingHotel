@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PasswordRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Models\PasswordReset;
 use App\Models\User;
 use Carbon\Carbon;
@@ -62,7 +62,7 @@ class NewPasswordController extends Controller
     public function edit($token)
     {
         //
-        return view('components.auth.reset-password', ['token' => $token]);
+        return view('auth.reset-password', ['token' => $token]);
     }
 
     /**
@@ -72,7 +72,7 @@ class NewPasswordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PasswordRequest $request, $email)
+    public function update(ResetPasswordRequest $request, $email)
     {
         $tokenExisted = PasswordReset::where('email', $email)->first();
         $token = $tokenExisted->token;
@@ -93,6 +93,9 @@ class NewPasswordController extends Controller
         $user->password = bcrypt($newPassword);
         $user->save();
 
+        $tokenExisted->delete();
+
+        return redirect()->back()->with('success', 'Changed password');
         // return page login
     }
 

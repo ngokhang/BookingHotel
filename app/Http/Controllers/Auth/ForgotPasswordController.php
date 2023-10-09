@@ -29,7 +29,7 @@ class ForgotPasswordController extends Controller
      */
     public function create(Request $request)
     {
-        return view('components.auth.send-code-reset-mail');
+        return view('auth.send-code-reset-mail');
     }
 
     /**
