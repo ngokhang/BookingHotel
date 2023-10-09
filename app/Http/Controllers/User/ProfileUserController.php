@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUserRequest;
 use App\Models\Avatar;
 use App\Models\ProfileUser;
@@ -15,9 +16,10 @@ class ProfileUserController extends Controller
     {
         //
         $user = User::with(['userInfo', 'avatar'])->where('id', 1)->first();
-        $avatar = $user->avatar->name . '.' . $user->avatar->extension;
+        $avatar = $user->avatar ? $user->avatar->name . '.' . $user->avatar->extension : 'not_upload';
         $fullname = $user->userInfo->first_name . ' ' . $user->userInfo->last_name;
         return view('user.account-settings', ['dataUser' => $user, 'fullname' => $fullname, 'avatar' => $avatar]);
+        // return $avatar;
     }
 
     /**
@@ -29,7 +31,6 @@ class ProfileUserController extends Controller
      */
     public function update(ProfileUserRequest $request)
     {
-
         $res = UserInfo::where('id', $request->user_id)->update($request->except(['_token', '_method', 'avatar', 'email']));
         User::where('id', $request->user_id)->update(['email' => $request->email]);
         $fileAvatar = $request->file('avatar');

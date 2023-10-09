@@ -26,9 +26,10 @@ class ProfileUserRequest extends FormRequest
         return [
             //
             'first_name' => 'required|string|max:255',
-            // 'last_name' => 'required|string|max:255',
-            // 'profile_address' => 'required|string|max:255',
-            // 'profile_phonenumber' => 'required|string|max:11',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'profile_address' => 'string|max:255',
+            'profile_phonenumber' => 'string|max:11',
         ];
     }
 
@@ -36,7 +37,9 @@ class ProfileUserRequest extends FormRequest
     {
         return [
             'profile_firstname.required' => "Firstname field is empty",
-            'profile_firstname.regex' => "Fields mustn't special characters"
+            'profile_lastname.required' => "Lastname field is empty",
+            'profile_firstname.regex' => "Fields mustn't special characters",
+            'email.required' => "Email is invalid"
         ];
     }
 }

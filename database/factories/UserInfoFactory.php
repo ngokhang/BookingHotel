@@ -21,7 +21,7 @@ class UserInfoFactory extends Factory
             'first_name' => 'Tommy',
             'last_name' => 'Shelby',
             'dob' => fake()->date(),
-            'email' => fake()->email(),
+            'address' => fake()->address(),
             'phone_number' => fake()->phoneNumber()
         ];
     }
