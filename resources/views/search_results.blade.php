@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('home')
 
-<head>
-    @include('head')
-    <title>Booking Hotel</title>
-</head>
-
-<body>
-    @include('layout.header')
-
-    <div class="container grid">
-        <div class="hotel-main-list">
+@section('content')
+    <div class="container">
+        <h1>Kết quả tìm kiếm cho: {{ $country }}</h1>
+        <ul>
             @foreach ($hotels as $hotel)
                 <a href="#" class="hotel-main-item">
                     <!-- slideshow hình ảnh -->
@@ -41,15 +34,6 @@
                     </div>
                 </a>
             @endforeach
-
-            <div class="hotel-main-more">
-                <h4>Tiếp tục khám phá danh mục tuyệt vời</h4>
-                <button class="button-hotel-more">Hiển thị thêm</button>
-            </div>
-        </div>
+        </ul>
     </div>
-
-    @include('layout.footer')
-</body>
-
-</html>
+@endsection
