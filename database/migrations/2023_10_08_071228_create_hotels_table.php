@@ -15,6 +15,13 @@ return new class extends Migration
     {
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
+<<<<<<< HEAD:database/migrations/2014_10_12_000000_create_users_table.php
+            $table->string('username');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+=======
             $table->string('name');
             $table->string('city');
             $table->string('country');
@@ -24,6 +31,7 @@ return new class extends Migration
             $table->string('image1');
             $table->string('image2'); 
             $table->string('image3'); 
+>>>>>>> 5a23e994701d0e7687c4acddb528355d31da37b1:database/migrations/2023_10_08_071228_create_hotels_table.php
             $table->timestamps();
         });
     }

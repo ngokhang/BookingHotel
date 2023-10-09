@@ -1,13 +1,4 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/assets/images/dao.jpg": "/assets/images/dao.jpg",
-    "/assets/images/ho.jpg": "/assets/images/ho.jpg",
-    "/assets/images/hoboi.jpg": "/assets/images/hoboi.jpg",
-    "/assets/images/khungcanh.jpg": "/assets/images/khungcanh.jpg",
-    "/assets/images/nha.jpg": "/assets/images/nha.jpg",
-    "/assets/images/phong.jpg": "/assets/images/phong.jpg",
-    "/assets/images/thanhpho.jpg": "/assets/images/thanhpho.jpg",
-    "/assets/images/thuyen.jpg": "/assets/images/thuyen.jpg",
-    "/assets/images/vuichoi.jpg": "/assets/images/vuichoi.jpg"
+    "/css/app.css": "/css/app.css"
 }
