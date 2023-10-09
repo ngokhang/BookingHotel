@@ -21,7 +21,7 @@
 }
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: #fff;
   font-size: 62.5%;
   line-height: 1.6rem;
@@ -93,7 +93,7 @@ header {
   cursor: pointer;
 }
 
-.header-search-item:hover .header-search-city,
+.header-search-item:hover .header-search-country,
 .header-search-item:hover .header-search-price {
   display: block;
 }
@@ -136,7 +136,7 @@ header {
   color: #50b1ee;
 }
 
-.header-search-city,
+.header-search-country,
 .header-search-price {
   display: none;
   position: absolute;
@@ -149,7 +149,7 @@ header {
   left: -16px;
 }
 
-.header-search-city::before,
+.header-search-country::before,
 .header-search-price::before {
   position: absolute;
   content: " ";
@@ -160,19 +160,19 @@ header {
   left: 0;
 }
 
-.search-city-item,
+.search-country-item,
 .search-price-item {
   padding: 8px 16px;
 }
 
-.search-city-item:hover,
+.search-country-item:hover,
 .search-price-item:hover {
   background-color: #f2f2f2;
   overflow: hidden;
   cursor: pointer;
 }
 
-.search-city-list,
+.search-country-list,
 .search-price-list {
   line-height: 1.8rem;
 }
