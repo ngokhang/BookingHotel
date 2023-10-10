@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('head')
+<title>@yield('title')</title>
 
 <body>
     <main id="app">

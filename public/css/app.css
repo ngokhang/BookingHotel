@@ -11,63 +11,140 @@
 }
 
 .profile-content {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  margin-top: 120px !important;
+  margin-bottom: 56px;
 }
 .profile-content .wrapper {
-  margin: 20px 20px;
-  height: 75vh;
+  max-width: 1140px;
+  height: 100vh;
+  margin: 0 auto;
 }
-.profile-content .wrapper .show-info {
+.profile-content .wrapper .title-account {
+  font-size: 2rem;
+  line-height: 1.25;
+  color: rgb(34, 34, 34);
+}
+.profile-content .wrapper .title-info > * {
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+}
+.profile-content .wrapper .settings {
+  display: flex;
+  gap: 16px;
+  margin-top: 65px;
+}
+.profile-content .wrapper .settings-item {
+  width: 33.3333333333%;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px 0px;
+  border-radius: 12px;
+  color: #222222;
+}
+.profile-content .wrapper .settings-item-link {
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
 }
-.profile-content .wrapper .show-info .user-avatar {
-  width: 100%;
+.profile-content .wrapper .settings-item .link-content {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
 }
-.profile-content .wrapper .show-info .user-avatar .avatar-mask {
+.profile-content .wrapper .settings-item .link-content h3 {
+  font-size: 22px;
+  line-height: 1.25;
+}
+.profile-content .wrapper .settings-item .link-content p {
+  font-size: 0.875rem !important;
+  line-height: 1.125rem !important;
+  color: rgb(113, 113, 113) !important;
+  font-weight: 400 !important;
+}
+
+#form-update {
+  padding: 30px 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#form-update #form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 500px;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px 0px;
+}
+#form-update #form .form-title {
+  margin: 20px 0;
+  font-size: 24px;
+  line-height: 1.25;
+  text-align: center;
+}
+#form-update #form .form-text {
+  font-size: 18px;
+  line-height: 1.25;
+  color: #717171;
+}
+#form-update #form .form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#form-update #form .form-input.input-file input {
+  border: none;
+}
+#form-update #form .form-input input {
+  display: inline-block;
+  padding: 10px;
+  border-bottom: 1px solid gray;
+  outline: none;
+  font-size: 16px;
+}
+#form-update #form .form-input label {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 1.25;
+}
+#form-update #form .form-btn .button-submit {
   display: block;
+  width: 100%;
+  padding: 10px 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.25;
+  color: white;
+  background-color: #1d9bf9;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease-in;
+}
+#form-update #form .form-btn .button-submit:hover {
+  opacity: 0.75;
+  transition: all 0.25s ease-in;
+}
+#form-update #form .preview-img {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 12px;
+  text-align: center;
+}
+#form-update #form .preview-img img {
+  display: inline-block;
   width: 200px;
   height: 200px;
-  background: white;
-  border: 1px solid black;
-  border-radius: 50%;
-  transition: all 0.25s ease-in;
 }
-.profile-content .wrapper .show-info .user-avatar .avatar-mask img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  -o-object-fit: cover;
-     object-fit: cover;
+#form-update #form .redirect-to-signup {
+  text-align: center;
 }
-.profile-content .wrapper .show-info .text .username {
-  font-size: 2rem;
-  line-height: 2rem;
+#form-update #form .redirect-to-signup a {
+  color: #50b1ee;
 }
-.profile-content .wrapper .account-setting-sidebar {
-  background-color: #f6f6f6;
-}
-.profile-content .wrapper .account-setting-sidebar .menu-update {
-  padding: 0px 10px;
-}
-.profile-content .wrapper .account-setting-sidebar .menu-update .menu-update-item {
-  border: none !important;
-}
-.profile-content .wrapper .account-setting-sidebar .menu-update .menu-update-item a {
-  color: black;
-}
-.profile-content .wrapper .account-setting-sidebar .menu-update .menu-update-item :hover > a {
-  color: red;
-  transition: all 0.25s ease-in;
-}
-.profile-content .wrapper .account-setting-sidebar .menu-update a.active {
+#form-update #form .redirect-to-signup a:hover {
   color: red;
 }
 

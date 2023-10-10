@@ -42,7 +42,8 @@ Route::prefix('reset-password')->group(function () {
 /* Profile user route */
 Route::prefix('account')->group(function () {
     // Personal info
-    Route::get('/', [ProfileUserController::class, 'edit'])->name('profile.edit');
+    Route::get('/', [ProfileUserController::class, 'index'])->name('profile.index');
+    Route::get('/personal', [ProfileUserController::class, 'edit'])->name('profile.edit');
     Route::put('/', [ProfileUserController::class, 'update'])->name('profile.update');
     // Password
     Route::get('/password', [PasswordController::class, 'edit'])->name('password.edit');
