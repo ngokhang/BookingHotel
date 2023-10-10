@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Hotel;
 use App\Models\UserInfo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,5 +18,6 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(1)->create();
         UserInfo::factory(1)->create();
+        Hotel::factory(12)->create();
     }
 }

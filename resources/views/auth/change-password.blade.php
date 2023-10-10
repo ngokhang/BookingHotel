@@ -5,20 +5,18 @@
         <div class="col-12 title mb-3 border-bottom pt-2 pb-4">
             <h1 href="#" class="fs-3">Manage account</h1>
         </div>
-        <div class="wrapper row">
-            <div class="col-5 border py-5 rounded account-setting-sidebar">
-                <div class="row d-flex flex-column gap-5">
-                    <div class="col">
-                        <div class="show-info">
-                            <div class="user-avatar">
-                                <label class="avatar-mask">
-                                    <img src='{{ asset('uploads/avatar/' . "$avatar") }}' test="{{ $avatar }}"
-                                        onerror="this.style.display='none'">
-                                </label>
-                            </div>
-                            <div class="text">
-                                <h3 class="username">{{ $fullname }}</h3>
-                            </div>
+        <div class="wrapper row mt-5">
+            <div class="col-5 border rounded account-setting-sidebar">
+                <div class="row d-flex flex-column gap-5 pt-3">
+                    <div class="show-info">
+                        <div class="user-avatar">
+                            <label class="avatar-mask">
+                                <img src='{{ asset('uploads/avatar/' . "$avatar") }}' test="{{ $avatar }}"
+                                    onerror="this.style.display='none'">
+                            </label>
+                        </div>
+                        <div class="text">
+                            <h3 class="username">{{ $fullname }}</h3>
                         </div>
                     </div>
                     <ul class="col list-group menu-update">
