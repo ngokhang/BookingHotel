@@ -1,4 +1,3 @@
-@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -126,11 +125,9 @@
 }
 
 .grid {
-  /* width: 1360px; */
   max-width: 100%;
   margin: 0 auto;
   padding: 0 40px;
-  /* tự động căn giữa khối này trong khối khác*/
 }
 
 * {
@@ -147,13 +144,16 @@ body {
 }
 
 ul {
-  padding: 0;
-  list-style: none;
+  padding: 0 !important;
+}
+
+li {
+  list-style: none !important;
 }
 
 a {
-  text-decoration: none;
-  color: var(--title-text);
+  text-decoration: none !important;
+  color: var(--title-text) !important;
 }
 
 header {
@@ -282,8 +282,19 @@ header ul {
   left: 0;
 }
 
+.search-country-list,
+.search-price-list {
+  line-height: 1.8rem;
+}
+
 .search-country-item,
 .search-price-item {
+  width: 100%;
+}
+
+.search-country-item > a,
+.search-price-item > a {
+  display: block;
   padding: 8px 16px;
 }
 
@@ -292,11 +303,6 @@ header ul {
   background-color: #f2f2f2;
   overflow: hidden;
   cursor: pointer;
-}
-
-.search-country-list,
-.search-price-list {
-  line-height: 1.8rem;
 }
 
 .header-info {
@@ -393,7 +399,31 @@ header ul {
 }
 
 .container {
-  margin-top: 80px;
+  min-height: 480px;
+  max-width: calc(100% - 80px) !important;
+  padding-top: 80px;
+}
+
+.container > h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--title-text);
+  margin-bottom: 20px;
+  padding-top: 20px;
+}
+
+.container > img {
+  width: 20%;
+  margin: 20px auto;
+  display: block;
+}
+
+.container > p {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primary-text);
+  margin-bottom: 20px;
 }
 
 .hotel-main-list {
@@ -406,13 +436,17 @@ header ul {
   margin: 20px 0;
   border-radius: 10px;
   overflow: hidden;
-  height: 360px;
+  height: 390px;
   width: calc(25% - 24px);
   position: relative;
 }
 
+.hotel-main-item:hover {
+  cursor: pointer;
+}
+
 .hotel-slide-img {
-  height: 70%;
+  height: 65%;
   width: 100%;
   position: relative;
 }
@@ -499,12 +533,13 @@ header ul {
   cursor: text;
 }
 
-.hotel-main-add {
+.hotel-main-info > h4 {
   font-size: 1rem;
   font-weight: 700;
 }
 
 .hotel-main-info > p {
+  margin-bottom: 0;
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--primary-text);
@@ -517,6 +552,7 @@ header ul {
 }
 
 .hotel-main-more {
+  width: 100%;
   text-align: center;
   margin: auto;
   padding: 30px 0;
@@ -589,7 +625,7 @@ footer {
 }
 
 .footer-info-support {
-  padding: 20px 0;
+  padding: 20px 0 0;
 }
 
 .footer-info-item > a {
