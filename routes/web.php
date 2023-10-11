@@ -49,6 +49,7 @@ Route::prefix('account')->group(function () {
     Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
 });
 // trang chủ
-Route::get('/', [HomeController::class, 'index']);
+// Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 //trang tìm kiếm
 Route::get('/search', [SearchController::class, 'index'])->name('search');

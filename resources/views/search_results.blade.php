@@ -1,11 +1,17 @@
-@extends('home')
+@extends('layout.app')
 
 @section('content')
-    <div class="container">
-        <h1>Kết quả tìm kiếm cho: {{ $country }}</h1>
-        <ul>
+    <div class="container grid">
+        @if ($country || $price || $keyword)
+            <h2>Kết quả tìm kiếm cho: {{ $keyword }} {{ $country }} 
+                @if (isset($price))
+                {{ $priceString }}
+            @endif
+            </h2>
+        @endif
+        <div class="hotel-main-list">
             @foreach ($hotels as $hotel)
-                <a href="#" class="hotel-main-item">
+                <div class="hotel-main-item">
                     <!-- slideshow hình ảnh -->
                     <div class="hotel-slide-img">
                         <img class="hotel-main-img" src="{{ $hotel->image1 }}" idx="0" alt="">
@@ -27,13 +33,13 @@
                     </div>
                     {{-- Thông tin khách sạn --}}
                     <div class="hotel-main-info">
-                        <h4 class="hotel-main-add">{{ $hotel->city }}, {{ $hotel->country }}</h4>
-                        <p class="distance">Cách {{ $hotel->distance }}km</p>
+                        <h4 class="hotel-main-name">{{ $hotel->name }}</h4>
+                        <p class="hotel-main-add">{{ $hotel->city }}, {{ $hotel->country }}</p>
                         <p class="hotel-main-day">{{ $hotel->check_in_date }}</p>
-                        <span class="hotel-main-price">${{ $hotel->price }} / đêm</span>
+                        <span class="hotel-main-price">${{ number_format($hotel->price, 2) }} / đêm</span>
                     </div>
-                </a>
+                </div>
             @endforeach
-        </ul>
+        </div>
     </div>
 @endsection

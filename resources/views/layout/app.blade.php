@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('head')
+
+<head>
+    @include('head')
+</head>
 
 <body>
     <main id="app">

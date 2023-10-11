@@ -7,7 +7,7 @@ $(function () {
         var changeImage = function () {
             var images = product.find(".hotel-main-img");
             images.hide();
-            images.eq(index).fadeIn(500);
+            images.eq(index).fadeIn(150);
             product.find(".index-button").removeClass("active");
             product.find(".index-button").eq(index).addClass("active");
         };
