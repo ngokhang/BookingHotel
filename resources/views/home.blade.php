@@ -3,7 +3,6 @@
 
 <head>
     @include('head')
-    <title>Booking Hotel</title>
 </head>
 
 <body>
@@ -12,7 +11,7 @@
     <div class="container grid">
         <div class="hotel-main-list">
             @foreach ($hotels as $hotel)
-                <a href="#" class="hotel-main-item">
+                <div class="hotel-main-item">
                     <!-- slideshow hình ảnh -->
                     <div class="hotel-slide-img">
                         <img class="hotel-main-img" src="{{ asset($hotel->image1) }}" idx="0" alt="">
@@ -34,12 +33,12 @@
                     </div>
                     {{-- Thông tin khách sạn --}}
                     <div class="hotel-main-info">
-                        <h4 class="hotel-main-add">{{ $hotel->city }}, {{ $hotel->country }}</h4>
-                        <p class="distance">Cách {{ $hotel->distance }}km</p>
+                        <h4 class="hotel-main-name">{{ $hotel->name }}</h4>
+                        <p class="hotel-main-add">{{ $hotel->city }}, {{ $hotel->country }}</p>
                         <p class="hotel-main-day">{{ $hotel->check_in_date }}</p>
                         <span class="hotel-main-price">${{ $hotel->price }} / đêm</span>
                     </div>
-                </a>
+                </div>
             @endforeach
 
             <div class="hotel-main-more">
