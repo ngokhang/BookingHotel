@@ -1,3 +1,3 @@
-require('./bootstrap');
-require('./slider');
-
+require("./bootstrap");
+require("./slider");
+require("./manage-booking");

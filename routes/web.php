@@ -7,6 +7,7 @@ use App\Http\Controllers\User\ProfileUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\User\UserBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,9 @@ Route::prefix('account')->group(function () {
     // Password
     Route::get('/password', [PasswordController::class, 'edit'])->name('password.edit');
     Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
+    // Booking
+    Route::get('/your-booking', [UserBookingController::class, 'index'])->name('booking.index');
+    Route::delete('your-booking/{booking_id}', [UserBookingController::class, 'destroy'])->name('booking.destroy');
 });
 // trang chủ
 // Route::get('/', [HomeController::class, 'index']);

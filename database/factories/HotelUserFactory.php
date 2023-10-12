@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserHotel>
  */
-class UserHotelFactory extends Factory
+class HotelUserFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,8 +21,8 @@ class UserHotelFactory extends Factory
             //
             'user_id' => rand(1, 10),
             'hotel_id' => rand(1, 12),
-            'check_in' => Carbon::now()->timestamp(),
-            'check_out' => Carbon::now()->addDay(rand(1, 5))->timestamp(),
+            'check_in' => Carbon::now(),
+            'check_out' => Carbon::now()->addDay(rand(1, 5)),
             'accepted' => rand(0, 1)
         ];
     }

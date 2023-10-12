@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('country');
             $table->integer('distance');
             $table->integer('price');
-            $table->unsignedInteger('quantity_room');
+            $table->date('check_in_date');
+            $table->integer('quantity_room');
             $table->string('image1');
             $table->string('image2');
             $table->string('image3');
@@ -35,8 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('hotels', function (Blueprint $table) {
-            $table->string('price')->change();
-        });
+        Schema::dropIfExists('hotels');
     }
 };

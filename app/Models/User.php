@@ -54,6 +54,6 @@ class User extends Authenticatable
 
     public function hotels()
     {
-        return $this->hasMany(Hotel::class);
+        return $this->belongsToMany(Hotel::class)->withPivot(['accepted', 'check_in', 'check_out', 'id']);
     }
 }
