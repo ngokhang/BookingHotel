@@ -17,9 +17,11 @@ class UserBookingController extends Controller
     public function index()
     {
         //
-        $userBookingData = User::with('hotels')->where('id', 4)->first()->hotels()->paginate(5);
-        return view('user.booking-list', compact('userBookingData'));
-        // return $userBookingData;
+        $userBookingData = User::with('hotels')->where('id', 4)->first()->hotels()->where('deleted_at', null)->paginate(5);
+        $historyBookingData = User::with('hotels')->where('id', 4)->first()->hotels()->where('deleted_at', '!=', null)->get();
+        return view('user.booking-list', compact('userBookingData', 'historyBookingData'));
+        // $userBookingData = HotelUser::withTrashed()->where('id', 4)->get();
+        // return $historyBookingData;
     }
 
     /**
@@ -87,7 +89,7 @@ class UserBookingController extends Controller
     {
         //
         $query = HotelUser::query();
-        $result = $query->where('id', $id)->delete();
+        $result = $query->where('id', $id)->forceDelete();
         if ($result) {
             return redirect()->back()->with('success', 'Huỷ đặt phòng thành công');
         }

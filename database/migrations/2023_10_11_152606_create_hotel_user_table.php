@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamp('check_in');
             $table->timestamp('check_out');
             $table->string('accepted');
+            $table->string('checked_out');
             $table->timestamps();
             $table->softDeletes();
         });

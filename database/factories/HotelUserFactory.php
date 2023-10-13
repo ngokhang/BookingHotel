@@ -23,7 +23,8 @@ class HotelUserFactory extends Factory
             'hotel_id' => rand(1, 12),
             'check_in' => Carbon::now(),
             'check_out' => Carbon::now()->addDay(rand(1, 5)),
-            'accepted' => rand(0, 1)
+            'accepted' => rand(0, 1),
+            'checked_out' => 0
         ];
     }
 }

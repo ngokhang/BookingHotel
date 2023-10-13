@@ -2269,11 +2269,46 @@ $(".mask").click(function (e) {
   if (!targetElements.is(e.target) && targetElements.has(e.target).length === 0) {
     targetElements.fadeOut();
     $(".mask").fadeOut();
+    $("#evaluation-form").fadeOut();
   }
 });
 $(".icon-close").click(function (e) {
   $(this).closest(".detailed-description").fadeOut();
   $(".mask").fadeOut();
+});
+$(".booking-history-link").click(function (e) {
+  e.preventDefault();
+  $(".room-list-link").removeClass("active");
+  $(this).addClass("active");
+  $(".booking-table").fadeOut();
+  $(".history-booking-table").fadeIn();
+});
+$(".room-list-link").click(function (e) {
+  e.preventDefault();
+  $(".booking-history-link").removeClass("active");
+  $(this).addClass("active");
+  $(".booking-table").fadeIn();
+  $(".history-booking-table").fadeOut();
+});
+var evaluationBtn = document.querySelector(".evaluation-btn");
+evaluationBtn.addEventListener("click", function (e) {
+  $(".mask").fadeIn();
+  $("#evaluation-form").fadeIn();
+});
+var stars = document.querySelectorAll(".star");
+var valueStars = document.querySelectorAll("#evaluation-form input");
+stars.forEach(function (star, index) {
+  star.addEventListener("click", function (e) {
+    valueStars[index].checked = true;
+    for (var i = index - 1; i >= 0; i--) {
+      stars[i].style.color = "yellow";
+      if (i > 0) valueStars[i].checked = false;
+    }
+    for (var _i = index + 1; _i < stars.length; _i++) {
+      stars[_i].style.color = "unset";
+      if (_i <= stars.length - 1) valueStars[_i].checked = false;
+    }
+  });
 });
 
 /***/ }),
