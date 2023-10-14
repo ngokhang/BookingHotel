@@ -12,13 +12,22 @@ use Illuminate\Http\Request;
 
 class ProfileUserController extends Controller
 {
+    public function index()
+    {
+        $user = User::with(['userInfo', 'avatar'])->where('id', 1)->first();
+        $avatar = $user->avatar ? $user->avatar->name . '.' . $user->avatar->extension : 'not_upload';
+        $fullname = $user->userInfo->first_name . ' ' . $user->userInfo->last_name;
+        return view('auth.account-settings', ['dataUser' => $user, 'fullname' => $fullname, 'avatar' => $avatar]);
+        return User::with(['userInfo', 'avatar'])->where('id', 1)->first();
+    }
+
     public function edit(Request $request)
     {
         //
         $user = User::with(['userInfo', 'avatar'])->where('id', 1)->first();
         $avatar = $user->avatar ? $user->avatar->name . '.' . $user->avatar->extension : 'not_upload';
         $fullname = $user->userInfo->first_name . ' ' . $user->userInfo->last_name;
-        return view('auth.account-settings', ['dataUser' => $user, 'fullname' => $fullname, 'avatar' => $avatar]);
+        return view('auth.personal-info', ['dataUser' => $user, 'fullname' => $fullname, 'avatar' => $avatar]);
         // return $avatar;
     }
 
@@ -47,6 +56,7 @@ class ProfileUserController extends Controller
             return redirect()->back()->with('success', 'Created successfully!');
         }
         return redirect()->back()->with('error', 'Update failed! Check your infomation');
+
     }
 
     public function updateAvatar()

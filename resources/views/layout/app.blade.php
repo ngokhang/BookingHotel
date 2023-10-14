@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    @include('head')
-</head>
+@include('head')
+<title>@yield('title')</title>
 
 <body>
     <main id="app">

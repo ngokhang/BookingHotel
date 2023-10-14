@@ -14,9 +14,9 @@
                 <div class="hotel-main-item">
                     <!-- slideshow hình ảnh -->
                     <div class="hotel-slide-img">
-                        <img class="hotel-main-img" src="{{ $hotel->image1 }}" idx="0" alt="">
-                        <img class="hotel-main-img" src="{{ $hotel->image2 }}" idx="1" alt="">
-                        <img class="hotel-main-img" src="{{ $hotel->image3 }}" idx="2" alt="">
+                        <img class="hotel-main-img" src="{{ asset($hotel->image1) }}" idx="0" alt="">
+                        <img class="hotel-main-img" src="{{ asset($hotel->image2) }}" idx="1" alt="">
+                        <img class="hotel-main-img" src="{{ asset($hotel->image3) }}" idx="2" alt="">
                         <!-- mũi tên chuyển ảnh -->
                         <i class="btn-change fas fa-chevron-left prev" style="color: #050505;"></i>
                         <i class="btn-change fas fa-chevron-right next" style="color: #050505;"></i>

@@ -15,9 +15,20 @@ class Hotel extends Model
         'country',
         'distance',
         'check_in_date',
+        'quantity_room',
         'price',
         'image1',
         'image2',
         'image3',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function evaluations()
+    {
+        return $this->hasMany(Evaluation::class);
+    }
 }

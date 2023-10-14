@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('city');
             $table->string('country');
             $table->integer('distance');
-            $table->date('check_in_date');
             $table->integer('price');
+            $table->date('check_in_date');
+            $table->integer('quantity_room');
             $table->string('image1');
             $table->string('image2');
             $table->string('image3');
@@ -35,8 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('hotels', function (Blueprint $table) {
-            $table->string('price')->change();
-        });
+        Schema::dropIfExists('hotels');
     }
 };

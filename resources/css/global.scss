@@ -8,3 +8,26 @@
 .error {
   color: red;
 }
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.pagination {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px 0;
+  ul {
+    li a, span {
+      display: inline-block;
+      width: 20px;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+    .active {
+      color: chocolate;
+    }
+  }
+}

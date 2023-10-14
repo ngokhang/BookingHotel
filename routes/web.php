@@ -7,6 +7,7 @@ use App\Http\Controllers\User\ProfileUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\User\UserBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,12 +43,20 @@ Route::prefix('reset-password')->group(function () {
 /* Profile user route */
 Route::prefix('account')->group(function () {
     // Personal info
-    Route::get('/', [ProfileUserController::class, 'edit'])->name('profile.edit');
+    Route::get('/', [ProfileUserController::class, 'index'])->name('profile.index');
+    Route::get('/personal', [ProfileUserController::class, 'edit'])->name('profile.edit');
     Route::put('/', [ProfileUserController::class, 'update'])->name('profile.update');
     // Password
     Route::get('/password', [PasswordController::class, 'edit'])->name('password.edit');
     Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
+    // Booking
+    Route::get('/your-booking', [UserBookingController::class, 'index'])->name('booking.index');
+    Route::delete('your-booking/{booking_id}', [UserBookingController::class, 'destroy'])->name('booking.destroy');
 });
+
+// Evalution hotel
+Route::post('hotel-review/{hotel_id}', [UserBookingController::class, 'update'])->name('hotel.eval');
+
 // trang chủ
 // Route::get('/', [HomeController::class, 'index']);
 Route::get('/', [HomeController::class, 'index'])->name('home');
