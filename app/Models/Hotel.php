@@ -26,4 +26,9 @@ class Hotel extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function evaluations()
+    {
+        return $this->hasMany(Evaluation::class);
+    }
 }

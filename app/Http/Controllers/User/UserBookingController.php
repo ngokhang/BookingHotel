@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EvaluationRequest;
+use App\Models\Evaluation;
 use App\Models\HotelUser;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserBookingController extends Controller
 {
@@ -18,9 +21,8 @@ class UserBookingController extends Controller
     {
         //
         $userBookingData = User::with('hotels')->where('id', 4)->first()->hotels()->where('deleted_at', null)->paginate(5);
-        $historyBookingData = User::with('hotels')->where('id', 4)->first()->hotels()->where('deleted_at', '!=', null)->get();
+        $historyBookingData = User::with('hotels')->where('id', 4)->first()->hotels()->where('deleted_at', '!=', null)->where('accepted', 1)->paginate(5);
         return view('user.booking-list', compact('userBookingData', 'historyBookingData'));
-        // $userBookingData = HotelUser::withTrashed()->where('id', 4)->get();
         // return $historyBookingData;
     }
 
@@ -74,9 +76,21 @@ class UserBookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EvaluationRequest $request, $hotel_id)
     {
         //
+        $pointRate = $request->quality_input;
+        $feedbackContent = $request->feedback_input;
+        $result = Evaluation::updateOrCreate(
+            ['hotel_id' => $hotel_id],
+            ['user_id' => 4, 'feedback' => $feedbackContent, 'point' => $pointRate]
+        );
+
+        if ($result) {
+            return redirect()->back()->with('success', 'Cảm ơn bạn đã đánh giá!');
+        } else {
+            return redirect()->back()->with('error', 'Nội dung không hợp lệ');
+        }
     }
 
     /**

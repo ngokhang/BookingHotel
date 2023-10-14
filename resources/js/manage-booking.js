@@ -46,6 +46,7 @@ $(".detail-btn").on("click", function (event) {
     // Show the corresponding details element
     $(".mask").fadeIn();
     $("#" + target).fadeIn();
+    console.log(target);
 });
 
 $(".mask").click(function (e) {
@@ -56,7 +57,7 @@ $(".mask").click(function (e) {
     ) {
         targetElements.fadeOut();
         $(".mask").fadeOut();
-        $("#evaluation-form").fadeOut();
+        $(".evalution-form").fadeOut();
     }
 });
 
@@ -81,23 +82,8 @@ $(".room-list-link").click(function (e) {
     $(".history-booking-table").fadeOut();
 });
 
-const evaluationBtn = document.querySelector(".evaluation-btn");
-evaluationBtn.addEventListener("click", function (e) {
+$(".evaluation-btn").on("click", function (e) {
+    let target = $(this).data("target");
     $(".mask").fadeIn();
-    $("#evaluation-form").fadeIn();
-});
-const stars = document.querySelectorAll(".star");
-const valueStars = document.querySelectorAll("#evaluation-form input");
-stars.forEach((star, index) => {
-    star.addEventListener("click", (e) => {
-        valueStars[index].checked = true;
-        for (let i = index - 1; i >= 0; i--) {
-            stars[i].style.color = "yellow";
-            if (i > 0) valueStars[i].checked = false;
-        }
-        for (let i = index + 1; i < stars.length; i++) {
-            stars[i].style.color = "unset";
-            if (i <= stars.length - 1) valueStars[i].checked = false;
-        }
-    });
+    $("#" + target).fadeIn();
 });

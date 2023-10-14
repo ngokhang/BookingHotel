@@ -53,6 +53,10 @@ Route::prefix('account')->group(function () {
     Route::get('/your-booking', [UserBookingController::class, 'index'])->name('booking.index');
     Route::delete('your-booking/{booking_id}', [UserBookingController::class, 'destroy'])->name('booking.destroy');
 });
+
+// Evalution hotel
+Route::post('hotel-review/{hotel_id}', [UserBookingController::class, 'update'])->name('hotel.eval');
+
 // trang chủ
 // Route::get('/', [HomeController::class, 'index']);
 Route::get('/', [HomeController::class, 'index'])->name('home');

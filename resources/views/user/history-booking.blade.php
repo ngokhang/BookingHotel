@@ -8,7 +8,7 @@
                 <th>Khách sạn</th>
                 <th>Thành phố</th>
                 <th>Quốc gia</th>
-                <th>Tình trạng</th>
+                <th>Trạng thái</th>
                 <th>Tuỳ chọn</th>
             </tr>
         </thead>
@@ -24,10 +24,11 @@
                     @endif
                     <td>
                         <div class="list-btn">
-                            @include('user.evaluation-form')
+                            <x-evalution-form :data="$data" />
                             <button class="detail-btn" data-target="infor-{{ $data->id }}">Xem thông tin chi
                                 tiết</button>
-                            <button class='evaluation-btn'>Đánh giá</button>
+                            <button class='evaluation-btn' data-target="evaluation-form-{{ $data->id }}">Đánh giá
+                            </button>
                         </div>
                     </td>
                 </tr>

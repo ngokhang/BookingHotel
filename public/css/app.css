@@ -933,7 +933,7 @@ footer {
   display: none;
   position: absolute;
   left: 50%;
-  top: 25%;
+  top: 50%;
   transform: translate(-50%, -50%);
   width: 500px;
   padding: 16px;
@@ -942,25 +942,57 @@ footer {
   background-color: white;
 }
 #manage-booking .form__header-title {
+  margin-top: 24px;
+  margin-bottom: 24px;
   font-size: 18px;
   line-height: 1.125rem;
 }
-#manage-booking .form__body-content .stars {
+#manage-booking .form__header-title h3 {
+  line-height: 1.5rem;
+}
+#manage-booking .form__body-content form {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
   margin: 30px 0;
 }
-#manage-booking .form__body-content div input[type=radio]:checked + label > i {
-  color: yellow;
+#manage-booking .form__body-content form .message-evaluation p {
+  text-align: start;
+  font-size: 16px;
+  line-height: 1.5rem;
+  color: gray;
 }
-#manage-booking .form__body-content div label {
+#manage-booking .form__body-content form .quality-evaluation {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+#manage-booking .form__body-content form .quality-evaluation div label {
   display: inline-block;
-  font-size: 20px;
-  line-height: 1.125rem;
-  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.5rem;
 }
-#manage-booking .form__body-content div label i {
-  color: unset;
+#manage-booking .form__body-content form .feedback-evaluation {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+#manage-booking .form__body-content form .feedback-evaluation textarea {
+  display: inline-block;
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid black;
+  border-radius: 6px;
+  font-size: 16px;
+  line-height: 1.5rem;
+}
+#manage-booking .form__body-content form button {
+  display: block;
+  width: 100%;
 }
