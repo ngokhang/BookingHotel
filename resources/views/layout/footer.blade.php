@@ -5,35 +5,35 @@
                 <ul class="footer-info-list">
                     <li class="footer-info-item">
                         <a href="#">Các thành phố</a>
-                        <img src="assets/images/thanhpho.jpg" alt="">
+                        <img src="/assets/images/thanhpho.jpg" alt="">
                     </li>
                     <li class="footer-info-item">
                         <a href="#">Khu vui choi</a>
-                        <img src="assets/images/vuichoi.jpg" alt="">
+                        <img src="/assets/images/vuichoi.jpg" alt="">
                     </li>
                     <li class="footer-info-item">
                         <a href="#">Biển đảo</a>
-                        <img src="assets/images/dao.jpg" alt="">
+                        <img src="/assets/images/dao.jpg" alt="">
                     </li>
                     <li class="footer-info-item">
                         <a href="#">Hồ bơi</a>
-                        <img src="assets/images/hoboi.jpg" alt="">
+                        <img src="/assets/images/hoboi.jpg" alt="">
                     </li>
                     <li class="footer-info-item">
                         <a href="#">Khung cảnh</a>
-                        <img src="assets/images/khungcanh.jpg" alt="">
+                        <img src="/assets/images/khungcanh.jpg" alt="">
                     </li>
                     <li class="footer-info-item">
                         <a href="#">Nhà đơn </a>
-                        <img src="assets/images/nha.jpg" alt="">
+                        <img src="/assets/images/nha.jpg" alt="">
                     </li>
                     <li class="footer-info-item">
                         <a href="#">Phòng nghỉ dưỡng</a>
-                        <img src="assets/images/phong.jpg" alt="">
+                        <img src="/assets/images/phong.jpg" alt="">
                     </li>
                     <li class="footer-info-item">
                         <a href="#">Du thuyền</a>
-                        <img src="assets/images/thuyen.jpg" alt="">
+                        <img src="/assets/images/thuyen.jpg" alt="">
                     </li>
                 </ul>
             </div>

@@ -7,6 +7,8 @@ use App\Http\Controllers\User\ProfileUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\HotelController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +21,9 @@ use App\Http\Controllers\SearchController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 
 /* Reset password */
 // Route::prefix('reset-password', function () {
@@ -38,7 +40,6 @@ Route::prefix('reset-password')->group(function () {
     Route::post('/{token}', [NewPasswordController::class, 'update'])->name('reset_pass.update');
 });
 
-
 /* Profile user route */
 Route::prefix('account')->group(function () {
     // Personal info
@@ -49,7 +50,8 @@ Route::prefix('account')->group(function () {
     Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
 });
 // trang chủ
-// Route::get('/', [HomeController::class, 'index']);
 Route::get('/', [HomeController::class, 'index'])->name('home');
 //trang tìm kiếm
 Route::get('/search', [SearchController::class, 'index'])->name('search');
+//trang chi tiết thông tin phòng
+Route::get('/hotel/{id}', [HotelController::class, 'show'])->name('hotel.show');

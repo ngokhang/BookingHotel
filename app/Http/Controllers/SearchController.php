@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Hotel;
 
@@ -8,7 +10,7 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         $country = $request->input('country'); // Lấy giá trị country từ request
-        $city = $request->input('city');
+        $city = $request->input('city'); // Lấy giá trị city từ request
         $price = $request->input('price'); // Lấy giá trị price từ request
         $keyword = $request->input('keyword'); // Lấy giá trị từ khóa từ request
 
@@ -22,7 +24,6 @@ class SearchController extends Controller
                     ->orWhere('city', 'like', '%' . $keyword . '%')
                     ->orWhere('country', 'like', '%' . $keyword . '%');
             });
-
         }
 
         // Thêm điều kiện tìm kiếm dựa trên country (nếu có)
@@ -50,14 +51,10 @@ class SearchController extends Controller
         // Lấy kết quả tìm kiếm
         $hotels = $query->get();
 
-        if ($country || $price || $keyword) {
-            return view('search_results', compact('hotels', 'keyword', 'country', 'price', 'priceString'));
+        if ($hotels->isEmpty()) {
+            return view('no_results', compact('hotels', 'keyword', 'country','price', 'priceString'));
         } else {
-            if ($hotels->isEmpty()) {
-                return view('no_results');
-            } else {
-                return view('search_results', compact('hotels', 'keyword', 'country', 'price', 'priceString'));
-            }
+            return view('search_results', compact('hotels', 'keyword', 'country', 'price', 'priceString'));
         }
     }
 }
