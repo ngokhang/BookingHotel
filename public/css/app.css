@@ -907,6 +907,8 @@ footer {
   align-items: center;
 }
 #manage-booking .detailed-description .swiper-slide img {
+  width: 100%;
+  display: block;
   -o-object-fit: cover;
      object-fit: cover;
 }

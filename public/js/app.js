@@ -2228,8 +2228,9 @@ __webpack_require__.r(__webpack_exports__);
 var swiper = new swiper_bundle__WEBPACK_IMPORTED_MODULE_1__["default"](".swiper", {
   // configure Swiper to use modules
   direction: "horizontal",
+  slidesPerView: 1,
+  spaceBetween: 10,
   loop: true,
-  parallax: true,
   autoplay: {
     delay: 2000
   },

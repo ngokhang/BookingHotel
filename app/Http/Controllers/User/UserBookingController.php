@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EvaluationRequest;
 use App\Models\Evaluation;
+use App\Models\Hotel;
 use App\Models\HotelUser;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,10 +21,13 @@ class UserBookingController extends Controller
     public function index()
     {
         //
-        $userBookingData = User::with('hotels')->where('id', 4)->first()->hotels()->where('deleted_at', null)->paginate(5);
+        $userBookingData = User::with(['hotels', 'hotels.evaluations'])->where('id', 4)->first();
+        // ->hotels()->where('deleted_at', null)->paginate(5);
         $historyBookingData = User::with('hotels')->where('id', 4)->first()->hotels()->where('deleted_at', '!=', null)->where('accepted', 1)->paginate(5);
-        return view('user.booking-list', compact('userBookingData', 'historyBookingData'));
-        // return $historyBookingData;
+        // return view('user.booking-list', compact('userBookingData', 'historyBookingData'));
+        return User::with(['hotels', 'hotels.evaluations'])->where('id', 4)->where(function ($query) {
+            $query->where('hotel_id', 11);
+        })->get();
     }
 
     /**

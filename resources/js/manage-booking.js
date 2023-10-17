@@ -9,8 +9,9 @@ import "swiper/css/navigation";
 const swiper = new Swiper(".swiper", {
     // configure Swiper to use modules
     direction: "horizontal",
+    slidesPerView: 1,
+    spaceBetween: 10,
     loop: true,
-    parallax: true,
     autoplay: {
         delay: 2000,
     },
