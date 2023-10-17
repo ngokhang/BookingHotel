@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\User\UserBookingController;
+use App\Http\Controllers\HotelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +63,5 @@ Route::post('hotel-review/{hotel_id}', [UserBookingController::class, 'update'])
 Route::get('/', [HomeController::class, 'index'])->name('home');
 //trang tìm kiếm
 Route::get('/search', [SearchController::class, 'index'])->name('search');
+//trang chi tiết thông tin phòng
+Route::get('/hotel/{id}', [HotelController::class, 'show'])->name('hotel.show');

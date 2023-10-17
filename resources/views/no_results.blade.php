@@ -1,9 +1,9 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="container">
+    <div class="container grid">
         <h2>Không có kết quả tìm kiếm cho: {{ $keyword }} {{ $country }} @if (isset($price))
-                ${{ number_format($price) }}
+                {{ $priceString }}
             @endif
         </h2>
         <img src="uploads/images/hotels/no_results.png" alt="">

@@ -17,10 +17,9 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('hotel_id');
-            $table->timestamp('check_in');
-            $table->timestamp('check_out');
+            $table->timestamp('check_in')->nullable();
+            $table->timestamp('check_out')->nullable();
             $table->string('accepted');
-            $table->string('checked_out');
             $table->timestamps();
             $table->softDeletes();
         });
