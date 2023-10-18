@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Hotel;
 
@@ -7,25 +9,21 @@ class SearchController extends Controller
 {
     public function index(Request $request)
     {
-        $country = $request->input('country'); // Lấy giá trị country từ request
+        $country = $request->input('country');
         $city = $request->input('city');
-        $price = $request->input('price'); // Lấy giá trị price từ request
-        $keyword = $request->input('keyword'); // Lấy giá trị từ khóa từ request
+        $price = $request->input('price');
+        $keyword = $request->input('keyword');
 
-        // Bắt đầu với một truy vấn dựng sẵn cho model Hotel
         $query = Hotel::query();
 
-        // Thêm điều kiện tìm kiếm dựa trên từ khóa (nếu có)
         if ($keyword) {
             $query->where(function ($query) use ($keyword) {
                 $query->orWhere('name', 'like', '%' . $keyword . '%')
-                    ->orWhere('city', 'like', '%' . $keyword . '%')
-                    ->orWhere('country', 'like', '%' . $keyword . '%');
+                ->orWhere('city', 'like', '%' . $keyword . '%')
+                ->orWhere('country', 'like', '%' . $keyword . '%');
             });
-
         }
 
-        // Thêm điều kiện tìm kiếm dựa trên country (nếu có)
         if ($country) {
             $query->where('country', $country);
         }
@@ -47,17 +45,13 @@ class SearchController extends Controller
             }
         }
 
-        // Lấy kết quả tìm kiếm
         $hotels = $query->get();
 
-        if ($country || $price || $keyword) {
-            return view('search_results', compact('hotels', 'keyword', 'country', 'price', 'priceString'));
-        } else {
-            if ($hotels->isEmpty()) {
-                return view('no_results');
-            } else {
-                return view('search_results', compact('hotels', 'keyword', 'country', 'price', 'priceString'));
-            }
+        if ($hotels->isEmpty()) {
+            return view('no_results', compact('keyword', 'country', 'price', 'priceString'));
         }
+
+        return view('search_results', compact('hotels', 'keyword', 'country', 'price', 'priceString'));
     }
+
 }
