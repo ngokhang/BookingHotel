@@ -34,7 +34,7 @@ li{
 
 a {
     text-decoration: none !important;
-    color: var(--title-text) !important;
+    color: var(--title-text);
 }
 
 header {
@@ -49,7 +49,6 @@ header {
     display: flex;
     align-items: center;
     background-color: #c2dff1;
-    /* justify-content: space-between; */
 }
 
 header ul {
@@ -313,11 +312,10 @@ header ul {
 .hotel-main-list{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 .hotel-main-item {
-    margin: 20px 0;
+    margin: 20px calc(72px/3/2);
     border-radius: 10px;
     overflow: hidden;
     height: 390px;
@@ -332,12 +330,11 @@ header ul {
 .hotel-slide-img {
     height: 65%;
     width: 100%;
-    position: relative;
 }
 
 .hotel-main-img {
     width: 100%;
-    height: 100%;
+    height: 65%;
     border-radius: 10px;
     display: block;
 }
@@ -352,7 +349,7 @@ header ul {
     text-align: center;
     margin: auto;
     position: absolute;
-    top: 50%;
+    top: 33%;
     transform: translateY(-50%);
 }
 
@@ -376,12 +373,15 @@ header ul {
     width: 100%;
     text-align: center;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    top: 60%;
 }
 
 .change-dot:hover{
     cursor: pointer;
+}
+
+.change-dot .active {
+    background: #73b6ec;
 }
 
 .index-button {
@@ -393,17 +393,12 @@ header ul {
     border: none;
 }
 
-.change-dot .active {
-    background: #73b6ec;
-}
-
 .favorite-hotel{
     position: absolute;
     top: 15px;
     right: 15px;
     font-size: 1.2rem;
-    color: #fff;
-    // z-index: 1;
+    color: #fdfdfd
 }
 
 .hotel-main-info {
@@ -415,7 +410,7 @@ header ul {
 }
 
 .hotel-main-info:hover {
-    cursor: text;
+    cursor: pointer;
 }
 
 .hotel-main-info>h4 {

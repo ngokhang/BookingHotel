@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\User\UserBookingController;
+use App\Http\Controllers\HotelController;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +22,9 @@ use App\Http\Controllers\User\UserBookingController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 
 /* Reset password */
 // Route::prefix('reset-password', function () {
@@ -62,3 +64,9 @@ Route::post('hotel-review/{hotel_id}', [UserBookingController::class, 'update'])
 Route::get('/', [HomeController::class, 'index'])->name('home');
 //trang tìm kiếm
 Route::get('/search', [SearchController::class, 'index'])->name('search');
+//trang chi tiết thông tin phòng
+Route::get('/hotel/{id}', [HotelController::class, 'show'])->name('hotel.show');
+//trang đặt phòng
+// Route::post('/booking/create/{hotel_id}', [UserBookingController::class, 'create'])->name('booking.create');
+Route::get('/booking/create/{hotel_id}', [UserBookingController::class, 'create'])->name('booking.create');
+Route::post('/booking/store', [UserBookingController::class, 'store'])->name('booking.store');

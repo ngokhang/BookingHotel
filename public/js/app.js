@@ -2165,6 +2165,43 @@ module.exports = {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 __webpack_require__(/*! ./slider */ "./resources/js/slider.js");
 __webpack_require__(/*! ./manage-booking */ "./resources/js/manage-booking.js");
+__webpack_require__(/*! ./booking */ "./resources/js/booking.js");
+
+/***/ }),
+
+/***/ "./resources/js/booking.js":
+/*!*********************************!*\
+  !*** ./resources/js/booking.js ***!
+  \*********************************/
+/***/ (() => {
+
+var checkInInput = document.querySelector('input[name="check_in_date"]');
+var checkOutInput = document.querySelector('input[name="check_out_date"]');
+var numGuestsInput = document.querySelector('input[name="num_guests"]');
+var totalCostInput = document.querySelector('input[name="total_cost"]');
+var errorMessage = document.querySelector("#error-message");
+checkInInput.addEventListener("input", calculateTotalCost);
+checkOutInput.addEventListener("input", calculateTotalCost);
+numGuestsInput.addEventListener("input", calculateTotalCost);
+function calculateTotalCost() {
+  var checkInDate = new Date(checkInInput.value);
+  var checkOutDate = new Date(checkOutInput.value);
+  if (checkInDate >= checkOutDate) {
+    errorMessage.textContent = "Ngày nhận phòng phải trước ngày trả phòng";
+    totalCostInput.value = "";
+  } else {
+    errorMessage.textContent = "";
+    var days = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
+    var numGuests = parseInt(numGuestsInput.value);
+    if (numGuests > numGuestsLimit) {
+      errorMessage.textContent = "Số lượng khách vượt quá giới hạn";
+      totalCostInput.value = "";
+    } else {
+      errorMessage.textContent = "";
+      totalCostInput.value = (pricePerNight * days).toFixed(0);
+    }
+  }
+}
 
 /***/ }),
 

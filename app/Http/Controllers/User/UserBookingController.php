@@ -9,6 +9,8 @@ use App\Models\HotelUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Hotel;
+use DateTime;
 
 class UserBookingController extends Controller
 {
@@ -19,11 +21,9 @@ class UserBookingController extends Controller
      */
     public function index()
     {
-        //
         $userBookingData = User::with('hotels')->where('id', 4)->first()->hotels()->where('deleted_at', null)->paginate(5);
         $historyBookingData = User::with('hotels')->where('id', 4)->first()->hotels()->where('deleted_at', '!=', null)->where('accepted', 1)->paginate(5);
         return view('user.booking-list', compact('userBookingData', 'historyBookingData'));
-        // return $historyBookingData;
     }
 
     /**
@@ -31,10 +31,14 @@ class UserBookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($hotel_id)
     {
-        //
+        $hotel = Hotel::findOrFail($hotel_id);
+        return view('user.booking-create', compact('hotel'));
     }
+
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -42,10 +46,50 @@ class UserBookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // $user_id = auth()->user()->id; // Lấy ID của người dùng hiện tại
     public function store(Request $request)
     {
-        //
+        $user_id = 1; // Thay thế bằng cách lấy ID của người dùng hiện tại, ví dụ: $user_id = auth()->user()->id;
+        $hotel_id = $request->input('hotel_id');
+        $check_in_date = $request->input('check_in_date');
+        $check_out_date = $request->input('check_out_date');
+        $num_guests = $request->input('num_guests');
+
+        // Kiểm tra xem người dùng đã đặt phòng cho khách sạn này trước đó chưa
+        $existingBooking = HotelUser::where('user_id', $user_id)
+            ->where('hotel_id', $hotel_id)
+            ->first();
+
+        if ($existingBooking) {
+            return redirect()->back()->with('error', 'Bạn đã đặt phòng cho khách sạn này rồi.');
+        }
+
+        // Tính toán tổng số tiền phải trả
+        $hotel = Hotel::findOrFail($hotel_id);
+        $pricePerNight = $hotel->price;
+        $checkIn = new DateTime($check_in_date);
+        $checkOut = new DateTime($check_out_date);
+        $totalCost = $pricePerNight * $checkIn->diff($checkOut)->days;
+
+        // Kiểm tra số lượng khách không vượt quá số lượng tối đa
+        if ($num_guests > $hotel->num_guest) {
+            return redirect()->back()->with('error', 'Số lượng khách vượt quá giới hạn.');
+        }
+
+        // Lưu thông tin đặt phòng vào cơ sở dữ liệu
+        $booking = new HotelUser();
+        $booking->hotel_id = $hotel_id;
+        $booking->check_in = $check_in_date;
+        $booking->check_out = $check_out_date;
+        $booking->num_people = $num_guests;
+        $booking->total_cost = $totalCost;
+        $booking->user_id = $user_id;
+        $booking->save();
+
+        return redirect()->back()->with('success', 'Đặt phòng thành công!');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -78,7 +122,6 @@ class UserBookingController extends Controller
      */
     public function update(EvaluationRequest $request, $hotel_id)
     {
-        //
         $pointRate = $request->quality_input;
         $feedbackContent = $request->feedback_input;
         $result = Evaluation::updateOrCreate(
@@ -101,13 +144,11 @@ class UserBookingController extends Controller
      */
     public function destroy($id)
     {
-        //
         $query = HotelUser::query();
         $result = $query->where('id', $id)->forceDelete();
         if ($result) {
             return redirect()->back()->with('success', 'Huỷ đặt phòng thành công');
         }
         return redirect()->back()->with('error', 'Huỷ đặt phòng thất bại');
-        // return $result;
     }
 }
