@@ -11,4 +11,5 @@ class HotelUser extends Model
     use HasFactory;
     use SoftDeletes;
     public $table = 'hotel_user';
+    protected $fillable = ['accepted'];
 }

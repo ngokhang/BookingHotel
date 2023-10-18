@@ -4,14 +4,16 @@
     <div class="container grid">
         <div class="info_hotel-name">
             <h2>{{ $hotel->name }}</h2>
-            <div class="info_hotel-favorite">
+            <div class="info_hotel-tasks">
                 <p>{{ $hotel->city }}, {{ $hotel->country }}</p>
                 <div>
-                    <span>Thêm yêu thích<i class="far fa-heart"></i></span>
-                    <span>Chia sẻ<i class="far fa-share-square"></i></span>
+                    <span>Thêm yêu thích <i class="far fa-heart"></i></span>
+                    <span>Chia sẻ <i class="far fa-share-square"></i></span>
+                    <a href="{{ route('booking.create', ['hotel_id' => $hotel->id]) }}">Đặt phòng</a>
                 </div>
             </div>
         </div>
+
 
         <div class="info_hotel-img">
             <div class="info_hotel-img--half-left">
@@ -112,8 +114,9 @@
 
             <div class="info_hotel-description">
                 <h3>Thông tin chỗ ở</h3>
+                <p>Tối đa cho {{ $hotel->num_guest }} khách</p>
                 <pre>{{ $hotel->description }}</pre>
-            </div>       
+            </div>
         </div>
 
         <div class="info_hotel-more">

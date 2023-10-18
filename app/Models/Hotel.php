@@ -17,7 +17,7 @@ class Hotel extends Model
         'description',
         'check_in_date',
         'price',
-        'quantity_room',
+        'num_guest',
         'image1',
         'image2',
         'image3',
