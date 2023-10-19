@@ -23,10 +23,12 @@
                         <p>{{ $data->city }} - {{ $data->country }}</p>
                     </td>
                     <td>
-                        <p>{{ $data->price }}$</p>
+                        <p>{{ $data->price }}</p>
                     </td>
-                    @if ($data->pivot->checked_out == 1)
+                    @if ($data->pivot->deleted_at != null)
                         <td>Đã trả phòng</td>
+                    @else
+                        <td>Chưa trả phòng</td>
                     @endif
                     <td>
                         <div class="list-btn">

@@ -21,9 +21,10 @@ class UserBookingController extends Controller
      */
     public function index()
     {
-        $userBookingData = User::with('hotels')->where('id', 1)->first()->hotels()->where('deleted_at', null)->paginate(5);
+        $userBookingData = User::with(['hotels'])->where('id', 1)->first()->hotels()->where('deleted_at', null)->paginate(5);
         $historyBookingData = User::with('hotels')->where('id', 1)->first()->hotels()->where('deleted_at', '!=', null)->where('accepted', 1)->paginate(5);
         return view('user.booking-list', compact('userBookingData', 'historyBookingData'));
+        // return $historyBookingData;
     }
 
     /**
