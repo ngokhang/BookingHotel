@@ -6,8 +6,8 @@
         <thead>
             <tr>
                 <th>Khách sạn</th>
-                <th>Thành phố</th>
-                <th>Quốc gia</th>
+                <th>Địa điểm</th>
+                <th>Số tiền phải trả</th>
                 <th>Trạng thái</th>
                 <th>Tuỳ chọn</th>
             </tr>
@@ -16,11 +16,19 @@
             @foreach ($historyBookingData as $data)
                 @include('user.detail-booking', ['data' => $data])
                 <tr class="hotel">
-                    <td><a href="#">{{ $data->name }}</a></td>
-                    <td><a href="#">{{ $data->city }}</a></td>
-                    <td><a href="#">{{ $data->country }}</a></td>
-                    @if ($data->pivot->checked_out == 1)
+                    <td>
+                        <p>{{ $data->name }}</p>
+                    </td>
+                    <td>
+                        <p>{{ $data->city }} - {{ $data->country }}</p>
+                    </td>
+                    <td>
+                        <p>{{ $data->price }}</p>
+                    </td>
+                    @if ($data->pivot->deleted_at != null)
                         <td>Đã trả phòng</td>
+                    @else
+                        <td>Chưa trả phòng</td>
                     @endif
                     <td>
                         <div class="list-btn">

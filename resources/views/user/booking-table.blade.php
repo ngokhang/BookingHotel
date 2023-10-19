@@ -6,8 +6,7 @@
         <thead>
             <tr>
                 <th>Khách sạn</th>
-                <th>Thành phố</th>
-                <th>Quốc gia</th>
+                <th>Địa điểm</th>
                 <th>Trạng thái</th>
                 <th>Tuỳ chọn</th>
             </tr>
@@ -17,8 +16,7 @@
                 @include('user.detail-booking', ['data' => $data])
                 <tr class="hotel">
                     <td><a href="#">{{ $data->name }}</a></td>
-                    <td><a href="#">{{ $data->city }}</a></td>
-                    <td><a href="#">{{ $data->country }}</a></td>
+                    <td><a href="#">{{ $data->city }} , {{ $data->country }}</a></td>
                     @if ($data->pivot->accepted == 1)
                         <td>Thành công</td>
                     @else

@@ -5,11 +5,11 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EvaluationRequest;
 use App\Models\Evaluation;
+use App\Models\Hotel;
 use App\Models\HotelUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Hotel;
 use DateTime;
 
 class UserBookingController extends Controller
@@ -21,9 +21,10 @@ class UserBookingController extends Controller
      */
     public function index()
     {
-        $userBookingData = User::with('hotels')->where('id', 4)->first()->hotels()->where('deleted_at', null)->paginate(5);
-        $historyBookingData = User::with('hotels')->where('id', 4)->first()->hotels()->where('deleted_at', '!=', null)->where('accepted', 1)->paginate(5);
+        $userBookingData = User::with(['hotels'])->where('id', 1)->first()->hotels()->where('deleted_at', null)->paginate(5);
+        $historyBookingData = User::with('hotels')->where('id', 1)->first()->hotels()->where('deleted_at', '!=', null)->where('accepted', 1)->paginate(5);
         return view('user.booking-list', compact('userBookingData', 'historyBookingData'));
+        // return $historyBookingData;
     }
 
     /**

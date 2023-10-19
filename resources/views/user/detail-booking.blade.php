@@ -37,10 +37,7 @@
                 <p class="text"><span>Hotel name: </span> {{ $data->name }} </p>
             </div>
             <div class="info-city">
-                <p class="text"><span>City: </span> {{ $data->city }} </p>
-            </div>
-            <div class="info-country">
-                <p class="text"><span>Country: </span> {{ $data->country }} </p>
+                <p class="text"><span>Address: </span> {{ $data->city }}, {{ $data->country }}</p>
             </div>
             <div class="info-name">
                 <p class="text"><span>Your check-in date: </span> {{ $data->pivot->check_in }} </p>
@@ -49,9 +46,17 @@
                 <p class="text"><span>Your check-out date: </span> {{ $data->pivot->check_out }}
                 </p>
             </div>
+            <div class="info-guests">
+                <p class="text"><span>Quantity guest: </span> {{ $data->pivot->num_people }}
+                </p>
+            </div>
+            <div class="info-guests">
+                <p class="text"><span>Total cost: </span> {{ $data->price }} <span>$</span>
+                </p>
+            </div>
         </div>
         <div class="description-content">
-            <p class="text"><span>Description: </span> {{ $data->name }} </p>
+            <p class="text"><span>Description: </span> {{ $data->description }} </p>
         </div>
     </div>
 </div>
