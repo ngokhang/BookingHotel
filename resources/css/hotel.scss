@@ -248,13 +248,14 @@
     line-height: 1.5;
     text-decoration: underline;
     padding: 10px;
+    transition: transform 0.3s;
 }
 
 .hotel-description-rules > span:hover,
 .hotel-description-security > span:hover,
 .hotel-description-policy > span:hover {
+    transform: translateX(10px);
     cursor: pointer;
-    opacity: 0.8;
 }
 
 .fa-angle-right {
