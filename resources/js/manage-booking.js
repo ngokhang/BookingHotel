@@ -71,16 +71,16 @@ $(".booking-history-link").click(function (e) {
     e.preventDefault();
     $(".room-list-link").removeClass("active");
     $(this).addClass("active");
-    $(".booking-table").fadeOut();
-    $(".history-booking-table").fadeIn();
+    $(".current-booking").fadeOut();
+    $(".history-booking").fadeIn();
 });
 
 $(".room-list-link").click(function (e) {
     e.preventDefault();
     $(".booking-history-link").removeClass("active");
     $(this).addClass("active");
-    $(".booking-table").fadeIn();
-    $(".history-booking-table").fadeOut();
+    $(".current-booking").fadeIn();
+    $(".history-booking").fadeOut();
 });
 
 $(".evaluation-btn").on("click", function (e) {

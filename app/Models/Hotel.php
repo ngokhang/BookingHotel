@@ -23,7 +23,7 @@ class Hotel extends Model
         'image3',
     ];
 
-    public function users()
+    public function customers()
     {
         return $this->belongsToMany(User::class);
     }
@@ -31,5 +31,15 @@ class Hotel extends Model
     public function evaluations()
     {
         return $this->hasMany(Evaluation::class);
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
     }
 }

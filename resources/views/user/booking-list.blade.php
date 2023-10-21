@@ -12,7 +12,6 @@
         </ul>
         <div class="wrapper">
             @include('user.booking-table')
-            @include('user.history-booking')
             <div class="pagination">
                 {{ $userBookingData->links('vendor.pagination.default') }}
             </div>
