@@ -14,7 +14,6 @@
             </div>
         </div>
 
-
         <div class="info_hotel-img">
             <div class="info_hotel-img--half-left">
                 <img src="/{{ $hotel->image1 }}" alt="">
