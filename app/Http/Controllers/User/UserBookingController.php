@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EvaluationRequest;
 use App\Models\Evaluation;
 use App\Models\Hotel;
-use App\Models\HotelUser;
+use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,10 +21,14 @@ class UserBookingController extends Controller
      */
     public function index()
     {
-        $userBookingData = User::with(['hotels'])->where('id', 1)->first()->hotels()->where('deleted_at', null)->paginate(5);
-        $historyBookingData = User::with('hotels')->where('id', 1)->first()->hotels()->where('deleted_at', '!=', null)->where('accepted', 1)->paginate(5);
-        return view('user.booking-list', compact('userBookingData', 'historyBookingData'));
-        // return $historyBookingData;
+        $userBookingData = Booking::with(['customer' => function ($query) {
+            return $query->where('id', 1);
+        }, 'hotel'])->paginate(5);
+        $history = Booking::with(['hotel', 'customer' => function ($query) {
+            return $query->where('id', 1);
+        }])->withTrashed()->get();
+        return view('user.booking-list', compact('userBookingData', 'history'));
+        // return $history;
     }
 
     /**
@@ -57,7 +61,7 @@ class UserBookingController extends Controller
         $num_guests = $request->input('num_guests');
 
         // Kiểm tra xem người dùng đã đặt phòng cho khách sạn này trước đó chưa
-        $existingBooking = HotelUser::where('user_id', $user_id)
+        $existingBooking = Booking::where('user_id', $user_id)
             ->where('hotel_id', $hotel_id)
             ->first();
 
@@ -78,7 +82,7 @@ class UserBookingController extends Controller
         }
 
         // Lưu thông tin đặt phòng vào cơ sở dữ liệu
-        $booking = new HotelUser();
+        $booking = new Booking();
         $booking->hotel_id = $hotel_id;
         $booking->check_in = $check_in_date;
         $booking->check_out = $check_out_date;
@@ -145,7 +149,7 @@ class UserBookingController extends Controller
      */
     public function destroy($id)
     {
-        $query = HotelUser::query();
+        $query = Booking::query();
         $result = $query->where('id', $id)->forceDelete();
         if ($result) {
             return redirect()->back()->with('success', 'Huỷ đặt phòng thành công');

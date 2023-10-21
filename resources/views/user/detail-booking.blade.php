@@ -17,13 +17,13 @@
         <div class="swiper-wrapper">
             <!-- Slides -->
             <div class="swiper-slide">
-                <img src="{{ asset($data->image1) }}" alt="">
+                <img src="{{ asset($data->hotel->image1) }}" alt="">
             </div>
             <div class="swiper-slide">
-                <img src="{{ asset($data->image2) }}" alt="">
+                <img src="{{ asset($data->hotel->image2) }}" alt="">
             </div>
             <div class="swiper-slide">
-                <img src="{{ asset($data->image3) }}" alt="">
+                <img src="{{ asset($data->hotel->image3) }}" alt="">
             </div>
             ...
         </div>
@@ -34,29 +34,29 @@
     <div class="description-infor">
         <div class="info">
             <div class="info-name">
-                <p class="text"><span>Hotel name: </span> {{ $data->name }} </p>
+                <p class="text"><span>Hotel name: </span> {{ $data->hotel->name }} </p>
             </div>
             <div class="info-city">
-                <p class="text"><span>Address: </span> {{ $data->city }}, {{ $data->country }}</p>
+                <p class="text"><span>Address: </span> {{ $data->hotel->city }}, {{ $data->hotel->country }}</p>
             </div>
             <div class="info-name">
-                <p class="text"><span>Your check-in date: </span> {{ $data->pivot->check_in }} </p>
+                <p class="text"><span>Your check-in date: </span> {{ $data->check_in }} </p>
             </div>
             <div class="info-name">
-                <p class="text"><span>Your check-out date: </span> {{ $data->pivot->check_out }}
+                <p class="text"><span>Your check-out date: </span> {{ $data->check_out }}
                 </p>
             </div>
             <div class="info-guests">
-                <p class="text"><span>Quantity guest: </span> {{ $data->pivot->num_people }}
+                <p class="text"><span>Quantity guest: </span> {{ $data->num_people }}
                 </p>
             </div>
             <div class="info-guests">
-                <p class="text"><span>Total cost: </span> {{ $data->price }} <span>$</span>
+                <p class="text"><span>Total cost: </span> {{ $data->total_cost }} <span>$</span>
                 </p>
             </div>
         </div>
         <div class="description-content">
-            <p class="text"><span>Description: </span> {{ $data->description }} </p>
+            <p class="text"><span>Description: </span> {{ $data->hotel->description }} </p>
         </div>
     </div>
 </div>

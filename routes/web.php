@@ -10,6 +10,8 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\User\UserBookingController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\OwnerManageBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,3 +72,17 @@ Route::get('/hotel/{id}', [HotelController::class, 'show'])->name('hotel.show');
 // Route::post('/booking/create/{hotel_id}', [UserBookingController::class, 'create'])->name('booking.create');
 Route::get('/booking/create/{hotel_id}', [UserBookingController::class, 'create'])->name('booking.create');
 Route::post('/booking/store', [UserBookingController::class, 'store'])->name('booking.store');
+
+// Owner hotel - chu khach san
+Route::prefix('owner')->group(function () {
+    // Show profile owner
+    Route::get('/profile', [OwnerController::class, 'show'])->name('owner.show');
+
+    // Get hotel list of owners
+    Route::get('/hotels', [OwnerManageBookingController::class, 'index'])->name('owner_manage.index');
+
+    // Booking list
+    Route::get('/manage-booking/{hotel_id}', [OwnerManageBookingController::class, 'show'])->name('onwer_manage.show');
+    Route::get('/manage-booking/{hotel_id}/accept/{booking_id}', [OwnerManageBookingController::class, 'update'])->name('owner_manage.update');
+    Route::get('/manage-booking/{hotel_id}/delete/{booking_id}', [OwnerManageBookingController::class, 'destroy'])->name('owner_manage.destroy');
+});

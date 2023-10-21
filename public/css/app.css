@@ -832,6 +832,9 @@ footer {
 #manage-booking .booking-list th {
   background-color: #f2f2f2;
 }
+#manage-booking .booking-list .history-booking {
+  display: none;
+}
 #manage-booking .booking-list .list-btn {
   display: flex;
   gap: 10px;
