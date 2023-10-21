@@ -48,7 +48,7 @@
                     </li>
                     <li class="footer-info-contact">
                         <a href="#">Tiếng Việt (VN)</a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-facebook" style="color: #1d9bf9;"></i></a>
                         <a href="#"><i class="fab fa-twitter-square" style="color: #1d9bf9;"></i></a>
                         <a href="#"><i class="fab fa-tiktok" style="color: #000000;"></i></a>
                     </li>
