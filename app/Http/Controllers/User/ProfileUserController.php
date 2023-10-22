@@ -38,14 +38,15 @@ class ProfileUserController extends Controller
      * @param  \App\Models\ProfileUser  $profileUser
      * @return \Illuminate\Http\Response
      */
-    public function update(ProfileUserRequest $request)
+    public function update(ProfileUserRequest $request, $id)
     {
         $res = UserInfo::where('id', $request->user_id)->update($request->except(['_token', '_method', 'avatar', 'email']));
         User::where('id', $request->user_id)->update(['email' => $request->email]);
         $fileAvatar = $request->file('avatar');
         if ($fileAvatar) {
             $fileAvatarName = implode('', array($request->first_name, $request->last_name)) . '.' . $fileAvatar->getClientOriginalExtension();
-            Avatar::updateOrCreate(['user_id' => $request->user_id], [
+            Avatar::updateOrCreate(['name' => $request->first_name . '' . $request->last_name], [
+                'user_id' => $id,
                 'path' => 'uploads/avatar',
                 'name' => $request->first_name . '' . $request->last_name,
                 'extension' => $fileAvatar->getClientOriginalExtension()
@@ -56,7 +57,6 @@ class ProfileUserController extends Controller
             return redirect()->back()->with('success', 'Created successfully!');
         }
         return redirect()->back()->with('error', 'Update failed! Check your infomation');
-
     }
 
     public function updateAvatar()
