@@ -12,6 +12,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\User\UserBookingController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\BookingListController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\OwnerManageBookingController;
 
@@ -65,12 +66,12 @@ Route::prefix('account')->group(function () {
     // Personal info
     Route::get('/', [ProfileUserController::class, 'index'])->name('profile.index');
     Route::get('/personal', [ProfileUserController::class, 'edit'])->name('profile.edit');
-    Route::put('/', [ProfileUserController::class, 'update'])->name('profile.update');
+    Route::put('/{id}', [ProfileUserController::class, 'update'])->name('profile.update');
     // Password
     Route::get('/password', [PasswordController::class, 'edit'])->name('password.edit');
     Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
     // Booking
-    Route::get('/your-booking', [UserBookingController::class, 'index'])->name('booking.index');
+    Route::get('/your-booking', [UserBookingController::class, 'index'])->withTrashed()->name('booking.index');
     Route::delete('your-booking/{booking_id}', [UserBookingController::class, 'destroy'])->name('booking.destroy');
 });
 
@@ -83,7 +84,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 //trang tìm kiếm
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 //trang chi tiết thông tin phòng
-Route::get('/hotel/{id}', [HotelController::class, 'show'])->name('hotel.show');
+Route::get('/hotel/{id}', [HotelController::class, 'show'])->withTrashed()->name('hotel.show');
 //trang đặt phòng
 // Route::post('/booking/create/{hotel_id}', [UserBookingController::class, 'create'])->name('booking.create');
 Route::get('/booking/create/{hotel_id}', [UserBookingController::class, 'create'])->name('booking.create');
@@ -94,13 +95,18 @@ Route::prefix('owner')->group(function () {
     // Show profile owner
     Route::get('/profile', [OwnerController::class, 'show'])->name('owner.show');
 
+    // trang chỉnh sửa thông tin khách sạn
+    Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotel.edit');
+    // lưu thông tin chỉnh sửa
+    Route::put('/hotels/{hotel}', [HotelController::class, 'update'])->name('hotel.update');
+
     // danh sách khách sạn của chủ khách sạn
     Route::get('/hotels', [OwnerManageBookingController::class, 'index'])->name('owner_manage.index');
 
-    // trang quản lý đặt phòng của khách sạn
-    Route::get('/manage-booking', [OwnerManageBookingController::class, 'show'])->name('owner_manage.show');
+    // trang danh sách đặt phòng của khách sạn
+    Route::get('/manage-booking', [BookingListController::class, 'index'])->name('booking-list.index');
     //accept cho ng dùng thuê phòng
-    Route::put('/manage-booking/{hotel_id}/accept/{booking_id}', [OwnerManageBookingController::class, 'update'])->name('owner_manage.update');
+    Route::put('/manage-booking/{hotel_id}/accept/{booking}', [OwnerManageBookingController::class, 'update'])->name('owner_manage.update');
     // trả phòng
-    Route::delete('/manage-booking/{hotel_id}/delete/{booking_id}', [OwnerManageBookingController::class, 'destroy'])->name('owner_manage.destroy');
+    Route::delete('/manage-booking/{hotel_id}/checkout/{booking_id}', [OwnerManageBookingController::class, 'destroy'])->name('owner_manage.destroy');
 });

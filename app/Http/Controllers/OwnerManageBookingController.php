@@ -8,6 +8,7 @@ use App\Models\Owner;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OwnerManageBookingController extends Controller
 {
@@ -18,7 +19,9 @@ class OwnerManageBookingController extends Controller
      */
     public function index()
     {
-        $user = User::with('hotels')->where('id', 1)->first(); // Lấy thông tin của user
+        $user = User::with(['hotels' => function ($query) {
+            return $query->withTrashed();
+        }])->where('id', 1)->first(); // Lấy thông tin của user
         return view('owner.owner_manage', compact('user')); // Truyền biến "$user" vào view
     }
 
@@ -51,10 +54,6 @@ class OwnerManageBookingController extends Controller
      */
     public function show($id)
     {
-        $bookingList = Hotel::with(['bookings.customer' => function ($query) {
-            return $query->orderBy('created_at', 'ASC');
-        }])->where('id', $id)->paginate(5);
-        return $bookingList;
     }
 
     /**
@@ -77,9 +76,15 @@ class OwnerManageBookingController extends Controller
      */
     public function update(Request $request, $hotel_id, $booking_id)
     {
-        //
-        $result = Booking::find($booking_id)->update(['accepted' => 1]);
-        return $result;
+        DB::transaction(function () use ($hotel_id, $booking_id) {
+            $resUpdateBookingTable = Booking::where('id', $booking_id)->update(['accepted' => 1]);
+            $resUpdateHotelTable = Hotel::where('id', $hotel_id)->delete();
+
+            if (!$resUpdateBookingTable || !$resUpdateHotelTable) {
+                return redirect()->route('booking-list.index')->with('error', 'Yêu cầu không hợp lệ');
+            }
+            return redirect()->route('booking-list.index')->with('success', 'Yêu cầu đã được chấp nhận');
+        });
     }
 
     /**
@@ -87,11 +92,18 @@ class OwnerManageBookingController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * Chức năng trả phòng
      */
     public function destroy($hotel_id, $booking_id)
     {
-        //
-        $result = Booking::find($booking_id)->delete();
-        return $result;
+        DB::transaction(function () use ($hotel_id, $booking_id) {
+            $resUpdateBookingTable = Booking::where('id', $booking_id)->delete();
+            $resUpdateHotelTable = Hotel::withTrashed()->where('id', $hotel_id)->restore();
+
+            if (!$resUpdateBookingTable || !$resUpdateHotelTable) {
+                return redirect()->route('booking-list.index')->with('error', 'Trả phòng thành công');
+            }
+            return redirect()->route('booking-list.index')->with('success', 'Trả phòng thất bại');
+        });
     }
 }

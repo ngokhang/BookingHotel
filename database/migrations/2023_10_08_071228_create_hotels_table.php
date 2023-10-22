@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('city');
             $table->string('country');
-            $table->integer('distance');
+            // $table->integer('distance');
             $table->string('description');
             $table->date('check_in_date');
             $table->integer('price');
@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('image2');
             $table->string('image3');
             $table->timestamps();
+            $table->softDeletes();
             $table->unsignedBigInteger('owner_id')->nullable();
 
             $table->foreign('owner_id')->references('id')->on('users');

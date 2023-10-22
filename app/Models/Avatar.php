@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Avatar extends Model
 {
     use HasFactory;
+    public $table = 'images';
 
     protected $fillable = ['id', 'user_id', 'name', 'path', 'extension'];
 

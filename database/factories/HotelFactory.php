@@ -22,7 +22,6 @@ class HotelFactory extends Factory
             'name' => fake()->text(20),
             'city' => fake()->city(),
             'country' => fake()->country(),
-            'distance' => rand(10, 99),
             'description' => fake()->text(),
             'check_in_date' => Carbon::now(),
             'num_guest' => rand(10, 30),
