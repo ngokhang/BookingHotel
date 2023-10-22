@@ -13,7 +13,6 @@ class Hotel extends Model
         'name',
         'city',
         'country',
-        'distance',
         'description',
         'check_in_date',
         'price',

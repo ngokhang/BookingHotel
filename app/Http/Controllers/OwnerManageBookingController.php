@@ -51,9 +51,10 @@ class OwnerManageBookingController extends Controller
      */
     public function show($id)
     {
+
         $bookingList = Hotel::with(['bookings.customer' => function ($query) {
             return $query->orderBy('created_at', 'ASC');
-        }])->where('id', $id)->paginate(5);
+        }])->paginate(5);
         return $bookingList;
     }
 
