@@ -81,8 +81,8 @@ Route::prefix('owner')->group(function () {
     // danh sách khách sạn của chủ khách sạn
     Route::get('/hotels', [OwnerManageBookingController::class, 'index'])->name('owner_manage.index');
 
-    // trang danh sách đặt phòng của khách sạn
-    Route::get('/manage-booking/{hotel_id}', [OwnerManageBookingController::class, 'show'])->name('onwer_manage.show');
+    // trang quản lý đặt phòng của khách sạn
+    Route::get('/manage-booking', [OwnerManageBookingController::class, 'show'])->name('owner_manage.show');
     //accept cho ng dùng thuê phòng
     Route::put('/manage-booking/{hotel_id}/accept/{booking_id}', [OwnerManageBookingController::class, 'update'])->name('owner_manage.update');
     // trả phòng

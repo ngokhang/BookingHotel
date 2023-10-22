@@ -21,6 +21,7 @@ class Hotel extends Model
         'image1',
         'image2',
         'image3',
+        'owner_id'
     ];
 
     public function customers()
