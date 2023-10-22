@@ -101,10 +101,10 @@ Route::prefix('owner')->group(function () {
     Route::put('/hotels/{hotel}', [HotelController::class, 'update'])->name('hotel.update');
 
     // danh sách khách sạn của chủ khách sạn
-    Route::get('/hotels', [OwnerManageBookingController::class, 'index'])->name('owner_manage.index');
+    Route::get('/hotels', [OwnerManageBookingController::class, 'index'])->withTrashed()->name('owner_manage.index');
 
     // trang danh sách đặt phòng của khách sạn
-    Route::get('/manage-booking', [BookingListController::class, 'index'])->name('booking-list.index');
+    Route::get('/manage-booking', [BookingListController::class, 'index'])->withTrashed()->name('booking-list.index');
     //accept cho ng dùng thuê phòng
     Route::put('/manage-booking/{hotel_id}/accept/{booking}', [OwnerManageBookingController::class, 'update'])->name('owner_manage.update');
     // trả phòng

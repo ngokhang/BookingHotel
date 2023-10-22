@@ -12,7 +12,7 @@ class BookingListController extends Controller
         $bookingPendingList = Booking::with(['hotel' => function ($query) {
             $ownerId = 1; // Auth::user()->id
             return $query->where('owner_id', $ownerId);
-        }, 'customer'])->paginate(5);
+        }, 'customer'])->withTrashed()->paginate(5);
         return $bookingPendingList;
     }
 }
