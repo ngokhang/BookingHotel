@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -19,7 +20,6 @@ class LoginController extends Controller
      */
     public function index()
     {
-        
     }
 
     /**
@@ -32,7 +32,8 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'username' => 'required|exists:users,username',
             'password' => 'required'
@@ -53,16 +54,19 @@ class LoginController extends Controller
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('home')->with('success', 'Đăng xuất thành công');
     }
 
-    public function google() {
+    public function google()
+    {
         return Socialite::driver('google')->redirect();
     }
 
-    public function callbackGoogle() {
+    public function callbackGoogle()
+    {
         try {
             $google = Socialite::driver('google')->user();
         } catch (\Exception $e) {
