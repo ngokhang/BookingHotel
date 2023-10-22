@@ -18,10 +18,8 @@ class OwnerManageBookingController extends Controller
      */
     public function index()
     {
-        // danh sách những khách sạn thuộc quản lý
-        // $ownerId = Auth::user()->id;
-
-        return User::with('hotels')->where('id', 1)->paginate(5);
+        $user = User::with('hotels')->where('id', 1)->first(); // Lấy thông tin của user
+        return view('owner.owner_manage', compact('user')); // Truyền biến "$user" vào view
     }
 
     /**
