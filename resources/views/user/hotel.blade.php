@@ -9,7 +9,11 @@
                 <div>
                     <span>Thêm yêu thích <i class="far fa-heart"></i></span>
                     <span>Chia sẻ <i class="far fa-share-square"></i></span>
-                    <a href="{{ route('booking.create', ['hotel_id' => $hotel->id]) }}">Đặt phòng</a>
+                    @if ($hotel->deleted_at == null)
+                        <a href="{{ route('booking.create', ['hotel_id' => $hotel->id]) }}">Đặt phòng</a>
+                    @else
+                        <a href="#">Đã cho thuê</a>
+                    @endif
                 </div>
             </div>
         </div>
