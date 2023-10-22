@@ -70,8 +70,8 @@
                 </div>
                 <div class="menu-acount">
                     <ul class="menu-acount_list">
-                        <li class="menu-acount_item"><a href="#">Đăng ký</a></li>
-                        <li class="menu-acount_item"><a href="#">Đăng nhập</a></li>
+                        <li class="menu-acount_item"><a href={{ route('register.create') }}>Đăng ký</a></li>
+                        <li class="menu-acount_item"><a href={{ route('login.create') }}>Đăng nhập</a></li>
                         <li class="menu-acount_item"><a href="#">Trợ giúp</a></li>
                     </ul>
                 </div>
