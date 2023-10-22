@@ -7,6 +7,7 @@
 
 <body>
     @include('layout.header')
+    @include('sweetalert::alert')
 
     <div class="container grid">
         <div class="hotel-main-list">
