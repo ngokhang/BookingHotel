@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\User\ProfileUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -33,6 +35,20 @@ use App\Http\Controllers\OwnerManageBookingController;
 // Route::prefix('reset-password', function () {
 //     Route::get('/', [ResetPasswordController::class, 'index'])->name('resetpass.index');
 // });
+
+Route::prefix('login')->group(function () {
+    Route::get('/', [LoginController::class, 'create'])->name('login.create');
+    Route::post('/', [LoginController::class, 'login'])->name('login.login');
+    Route::get('/google', [LoginController::class, 'google'])->name('login.google');
+    Route::get('/google/callback', [LoginController::class, 'callbackGoogle'])->name('login.google.callback');
+});
+
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::prefix('register')->group(function () {
+    Route::get('/', [RegisterController::class, 'create'])->name('register.create');
+    Route::post('/', [RegisterController::class, 'store'])->name('register.store');
+});
 
 Route::prefix('forgot-password')->group(function () {
     Route::get('/', [ForgotPasswordController::class, 'create'])->name('forgot.create');
