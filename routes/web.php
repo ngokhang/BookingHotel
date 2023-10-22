@@ -55,7 +55,7 @@ Route::prefix('account')->group(function () {
     Route::get('/password', [PasswordController::class, 'edit'])->name('password.edit');
     Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
     // Booking
-    Route::get('/your-booking', [UserBookingController::class, 'index'])->name('booking.index');
+    Route::get('/your-booking', [UserBookingController::class, 'index'])->withTrashed()->name('booking.index');
     Route::delete('your-booking/{booking_id}', [UserBookingController::class, 'destroy'])->name('booking.destroy');
 });
 
@@ -68,7 +68,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 //trang tìm kiếm
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 //trang chi tiết thông tin phòng
-Route::get('/hotel/{id}', [HotelController::class, 'show'])->name('hotel.show');
+Route::get('/hotel/{id}', [HotelController::class, 'show'])->withTrashed()->name('hotel.show');
 //trang đặt phòng
 // Route::post('/booking/create/{hotel_id}', [UserBookingController::class, 'create'])->name('booking.create');
 Route::get('/booking/create/{hotel_id}', [UserBookingController::class, 'create'])->name('booking.create');
@@ -88,9 +88,9 @@ Route::prefix('owner')->group(function () {
     Route::get('/hotels', [OwnerManageBookingController::class, 'index'])->name('owner_manage.index');
 
     // trang danh sách đặt phòng của khách sạn
-    Route::get('/manage-booking', [BookingListController::class, 'index'])->name('onwer_manage.index');
+    Route::get('/manage-booking', [BookingListController::class, 'index'])->name('booking-list.index');
     //accept cho ng dùng thuê phòng
-    Route::put('/manage-booking/{hotel_id}/accept/{booking_id}', [OwnerManageBookingController::class, 'update'])->name('owner_manage.update');
+    Route::put('/manage-booking/{hotel_id}/accept/{booking}', [OwnerManageBookingController::class, 'update'])->name('owner_manage.update');
     // trả phòng
-    Route::delete('/manage-booking/{hotel_id}/delete/{booking_id}', [OwnerManageBookingController::class, 'destroy'])->name('owner_manage.destroy');
+    Route::delete('/manage-booking/{hotel_id}/checkout/{booking_id}', [OwnerManageBookingController::class, 'destroy'])->name('owner_manage.destroy');
 });

@@ -22,13 +22,17 @@ class UserBookingController extends Controller
     public function index()
     {
         $userBookingData = Booking::with(['customer' => function ($query) {
-            return $query->where('id', 1);
-        }, 'hotel'])->paginate(5);
-        $history = Booking::with(['hotel', 'customer' => function ($query) {
-            return $query->where('id', 1);
-        }])->withTrashed()->get();
-        return view('user.booking-list', compact('userBookingData', 'history'));
-        // return $history;
+            return $query->where('id', 3);
+        }, 'hotel' => function ($query) {
+            return $query->withTrashed();
+        }])->withTrashed()->paginate(5);
+        $histories = Booking::with(['hotel' => function ($query) {
+            return $query->withTrashed();
+        }, 'customer' => function ($query) {
+            return $query->where('id', 3);
+        }])->withTrashed()->paginate(5);
+        return view('user.booking-list', compact('userBookingData', 'histories'));
+        // return $histories;
     }
 
     /**

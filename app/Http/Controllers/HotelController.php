@@ -52,11 +52,12 @@ class HotelController extends Controller
 
     public function show($id)
     {
-        $hotel = Hotel::find($id); // Lấy thông tin của khách sạn dựa trên $id
+        $hotel = Hotel::withTrashed()->where('id', $id)->first(); // Lấy thông tin của khách sạn dựa trên $id
         if (!$hotel) {
             return abort(404); // Xử lý trường hợp không tìm thấy khách sạn
         }
 
         return view('user.hotel', compact('hotel'));
+        // return $hotel;
     }
 }
