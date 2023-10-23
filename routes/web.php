@@ -92,9 +92,8 @@ Route::post('/booking/store', [UserBookingController::class, 'store'])->name('bo
 
 // Owner hotel - chu khach san
 Route::prefix('owner')->group(function () {
-    // Show profile owner
-    // Route::get('/profile', [OwnerController::class, 'show'])->name('owner.show');
-
+    // trang đổi mật khẩu chủ khách sạn
+    Route::get('/change-password', [OwnerController::class, 'edit'])->name('owner.edit');
     // trang chỉnh sửa thông tin khách sạn
     Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotel.edit');
     // cập nhật thông tin khách sạn

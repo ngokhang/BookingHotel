@@ -203,3 +203,28 @@ input[type="file"] {
     color: #fff;
     font-weight: 700;
 }
+
+
+#form-update.owner-changepassword{
+    padding: 0;
+    min-height: auto;
+    width: 100%;
+}
+
+#form-update.owner-changepassword #form{
+    padding: 20px;
+    width: 100%;
+    border-radius: 20px;
+}
+
+#form-update.owner-changepassword #form .form-btn .button-submit{
+    width: auto;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #50b1ee;
+    background-color: #fff;
+    color: #50b1ee;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 10px;
+}
