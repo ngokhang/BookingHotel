@@ -8,7 +8,7 @@
                 <a href="{{ route('owner_manage.index') }}" class="sidebar-owner__link">Quản lý khách sạn</a>
             </div>
             <div class="sidebar-owner__item">
-                <a href="#" class="sidebar-owner__link">Thêm khách sạn</a>
+                <a href="{{ route('add-hotel') }}" class="sidebar-owner__link">Thêm khách sạn</a>
             </div>
             <div class="sidebar-owner__item">
                 <a href="{{ route('booking-list.index') }}" class="sidebar-owner__link">Quản lý đơn đặt phòng</a>
@@ -40,8 +40,12 @@
                             <td>{{ $hotel->city }}, {{ $hotel->country }}</td>
                             <td>${{ $hotel->price }}</td>
                             <td>
-                                <a href="#" class="btn btn-edit">Sửa</a>
-                                <a href="#" class="btn btn-delete">Xóa</a>
+                                <a href="{{ route('hotel.edit', ['hotel' => $hotel->id]) }}" class="btn btn-edit">Sửa</a>
+                                <form action="{{ route('hotel.destroy', ['hotel' => $hotel->id]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-delete">Xóa</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
