@@ -90,7 +90,7 @@ Route::prefix('owner')->group(function () {
     // trang danh sách đặt phòng của khách sạn
     Route::get('/manage-booking', [BookingListController::class, 'index'])->name('booking-list.index');
     //accept cho ng dùng thuê phòng
-    Route::put('/manage-booking/{hotel_id}/accept/{booking}', [OwnerManageBookingController::class, 'update'])->name('owner_manage.update');
+    Route::put('/manage-booking/{hotel_id}/accept/{booking_id}', [OwnerManageBookingController::class, 'update'])->name('owner_manage.update');
     // trả phòng
     Route::delete('/manage-booking/{hotel_id}/checkout/{booking_id}', [OwnerManageBookingController::class, 'destroy'])->name('owner_manage.destroy');
 });

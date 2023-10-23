@@ -11,7 +11,7 @@
                 <a href="#" class="sidebar-owner__link">Thêm khách sạn</a>
             </div>
             <div class="sidebar-owner__item">
-                <a href="#" class="sidebar-owner__link">Quản lý đơn đặt phòng</a>
+                <a href="{{ route('booking-list.index') }}" class="sidebar-owner__link">Quản lý đơn đặt phòng</a>
             </div>
             <div class="sidebar-owner__item">
                 <a href="#" class="sidebar-owner__link">Thay đổi mật khẩu</a>
