@@ -34,10 +34,10 @@ class HotelController extends Controller
                 // Lưu hình ảnh vào thư mục
                 $image->move('uploads/images/hotels/', $imageName);
                 // Lưu thông tin hình ảnh vào cơ sở dữ liệu
-                Avatar::create([
+                Avatar::updateOrCreate([
                     'user_id' => $ownerId,
                     'path' => $imagePath,
-                    'name' => 'imghotel',
+                    'name' => 'hotel-' . mb_strtolower($hotel->country) . '-' . mb_strtolower($hotel->city) . '-' . $imageName,
                     'extension' => $image->getClientOriginalExtension(),
                 ]);
                 // Thêm đường dẫn hình ảnh vào mảng
@@ -70,6 +70,40 @@ class HotelController extends Controller
             ]);
             return redirect()->route('owner_manage.index')->with('success', 'Cập nhật thành công');
         }
+    }
+
+    public function store(HotelRequest $request)
+    {
+        $newHotel = new Hotel;
+        $newHotel->fill($request->all());
+        $newHotel->owner_id = 1; // Auth::user()->id
+
+        if ($request->hasFile('image')) {
+            $imagePaths = [];
+            // Lặp qua từng hình ảnh và lưu chúng vào thư mục và cơ sở dữ liệu
+            foreach ($request->file('image') as $index => $image) {
+                $index++;
+                $imageName = str_replace(' ', '', (str_replace('.', '', mb_strtolower($request->name . $index))) . '.' . $image->getClientOriginalExtension());
+                $imagePath = 'uploads/images/hotels/' . $imageName;
+                // Lưu hình ảnh vào thư mục
+                $image->move('uploads/images/hotels/', $imageName);
+                // Lưu thông tin hình ảnh vào cơ sở dữ liệu
+                Avatar::updateOrCreate([
+                    'user_id' => 1, // Auth::user()->id
+                    'path' => $imagePath,
+                    'name' => 'hotel-' . mb_strtolower($newHotel->country) . '-' . mb_strtolower($newHotel->city) . '-' . $imageName,
+                    'extension' => $image->getClientOriginalExtension(),
+                ]);
+                // Thêm đường dẫn hình ảnh vào mảng
+                array_push($imagePaths, $imagePath);
+            }
+            $newHotel->image1 = $imagePaths[0];
+            $newHotel->image2 = $imagePaths[1];
+            $newHotel->image3 = $imagePaths[2];
+        }
+
+        $resultCreate = $newHotel->save();
+        return $resultCreate ? redirect()->back()->with('success', 'Tạo khách sạn thành công') : redirect()->back()->with('error', 'Tạo khách sạn thất bại');
     }
 
     public function destroy(Hotel $hotel)

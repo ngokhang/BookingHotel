@@ -6,6 +6,6 @@
         }
         $html .= '</ul>';
 
-        Alert::html('Error during the creation!', $html, 'error');
+        Alert::html('Đã có lỗi xảy ra!', $html, 'error');
     @endphp
 @endif

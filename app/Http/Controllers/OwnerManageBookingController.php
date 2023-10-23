@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Hotel;
 use App\Models\Owner;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -76,12 +77,15 @@ class OwnerManageBookingController extends Controller
      */
     public function update(Request $request, $hotel_id, $booking_id)
     {
-        $result = DB::transaction(function () use ($hotel_id, $booking_id) {
-            Booking::where('id', $booking_id)->update(['accepted' => 1]);
-            Hotel::where('id', $hotel_id)->delete();
-        });
-        return $result ? redirect()->route('booking-list.index')->with('error', 'Trả phòng thành công') :
-        redirect()->route('booking-list.index')->with('error', 'Trả phòng thất bại');
+        try {
+            DB::transaction(function () use ($hotel_id, $booking_id) {
+                Booking::where('id', $booking_id)->update(['accepted' => 1]);
+                Hotel::where('id', $hotel_id)->delete();
+            });
+            return redirect()->route('booking-list.index')->with('success', 'Cho thuê thành công');
+        } catch (Exception $e) {
+            return redirect()->route('booking-list.index')->with('error', 'Cho thuê thất bại');
+        }
     }
 
     /**
@@ -93,11 +97,16 @@ class OwnerManageBookingController extends Controller
      */
     public function destroy($hotel_id, $booking_id)
     {
-        $result = DB::transaction(function () use ($hotel_id, $booking_id) {
-            Booking::where('id', $booking_id)->delete();
-            Hotel::withTrashed()->where('id', $hotel_id)->restore();
-        });
-        return $result ? redirect()->route('booking-list.index')->with('error', 'Trả phòng thành công') :
-        redirect()->route('booking-list.index')->with('error', 'Trả phòng thất bại');
+        try {
+            DB::transaction(function () use ($hotel_id, $booking_id) {
+                Booking::where('id', $booking_id)->update(['accepted' => 2]);
+                Booking::where('id', $booking_id)->delete();
+                Hotel::withTrashed()->where('id', $hotel_id)->restore();
+            });
+
+            return redirect()->route('booking-list.index')->with('success', 'Trả phòng thành công');
+        } catch (Exception $e) {
+            return redirect()->route('booking-list.index')->with('error', 'Trả phòng thất bại');
+        }
     }
 }

@@ -29,8 +29,8 @@ class HotelRequest extends FormRequest
             'country' => 'required|string|max:255',
             'description' => 'required|string|max:1000',
             'check_in_date' => 'date',
-            'price' => 'required|string',
-            'num_guest' => 'required|string',
+            'price' => 'required|string|alpha_dash',
+            'num_guest' => 'required|string|alpha_dash',
             'image' => 'array'
         ];
     }

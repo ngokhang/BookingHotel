@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container-owner">
+        <x-alert-errors />
         <div class="sidebar-owner">
             <h2>HOTEL DASHBOARD</h2>
             <div class="sidebar-owner__item">
@@ -23,9 +24,8 @@
 
         <div class="table-owner">
             <h3>Thêm thông tin khách sạn</h3>
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('hotel.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-
                 <div class="form-group">
                     <label for="name">Tên khách sạn</label>
                     <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
@@ -48,7 +48,8 @@
 
                 <div class="form-group">
                     <label for="check_in_date">Ngày check-in</label>
-                    <input type="date" name="check_in_date" id="check_in_date" class="form-control" value="{{ old('check_in_date') }}">
+                    <input type="date" name="check_in_date" id="check_in_date" class="form-control"
+                        value="{{ old('check_in_date') }}">
                 </div>
 
                 <div class="form-group">
@@ -58,7 +59,8 @@
 
                 <div class="form-group">
                     <label for="num_guest">Số lượng khách tối đa</label>
-                    <input type="text" name="num_guest" id="num_guest" class="form-control" value="{{ old('num_guest') }}">
+                    <input type="text" name="num_guest" id="num_guest" class="form-control"
+                        value="{{ old('num_guest') }}">
                 </div>
 
                 <div class="form-group">

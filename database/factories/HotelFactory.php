@@ -29,6 +29,8 @@ class HotelFactory extends Factory
             'image1' => 'uploads/images/hotels/rome1.webp',
             'image2' => 'uploads/images/hotels/rome2.webp',
             'image3' => 'uploads/images/hotels/rome3.webp',
+            'owner_id' => 1,
+            'admin_accepted' => rand(0, 1)
         ];
     }
 }
