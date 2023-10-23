@@ -283,7 +283,7 @@ header ul {
 
 //hotel - list
 .container{
-    min-height: 480px;
+    min-height: calc(100vh - 227px);
     max-width: calc(100% - 80px) !important;        
     padding-top: 80px;
 }
