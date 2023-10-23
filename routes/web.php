@@ -103,6 +103,7 @@ Route::prefix('owner')->group(function () {
     Route::delete('/hotels/{hotel}', [HotelController::class, 'destroy'])->name('hotel.destroy');
     // thêm khách sạn
     Route::get('/add-hotel', [OwnerManageBookingController::class, 'create'])->name('add-hotel');
+    Route::post('/add-hotel', [HotelController::class, 'store'])->name('hotel.store');
 
     // danh sách khách sạn của chủ khách sạn
     Route::get('/hotels', [OwnerManageBookingController::class, 'index'])->withTrashed()->name('owner_manage.index');

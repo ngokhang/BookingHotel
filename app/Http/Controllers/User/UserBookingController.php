@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BookingRequest;
 use App\Http\Requests\EvaluationRequest;
 use App\Models\Evaluation;
 use App\Models\Hotel;
@@ -56,7 +57,7 @@ class UserBookingController extends Controller
      * @return \Illuminate\Http\Response
      */
     // $user_id = auth()->user()->id; // Lấy ID của người dùng hiện tại
-    public function store(Request $request)
+    public function store(BookingRequest $request)
     {
         $user_id = 1; // Thay thế bằng cách lấy ID của người dùng hiện tại, ví dụ: $user_id = auth()->user()->id;
         $hotel_id = $request->input('hotel_id');

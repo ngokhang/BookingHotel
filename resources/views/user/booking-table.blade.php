@@ -56,10 +56,14 @@
                     <td>
                         <p>{{ $history->total_cost }}</p>
                     </td>
-                    @if ($history->deleted_at != null)
+                    @if ($history->deleted_at != null && $history->accepted == 2)
                         <td>Đã trả phòng</td>
-                    @else
-                        <td>Chưa trả phòng</td>
+                    @endif
+                    @if ($history->deleted_at == null && $history->accepted == 0)
+                        <td>Đang được duyệt</td>
+                    @endif
+                    @if ($history->deleted_at == null && $history->accepted == 1)
+                        <td>Đang phục vụ bạn</td>
                     @endif
                     <td>
                         <div class="list-btn">

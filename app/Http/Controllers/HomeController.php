@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         // Thực hiện logic để lấy dữ liệu từ bảng "hotels" và truyền nó vào view
-        $hotels = Hotel::withTrashed()->get(); // Truy vấn tất cả dữ liệu từ bảng "hotels"
+        $hotels = Hotel::withTrashed()->where('admin_accepted', true)->paginate(12); // Truy vấn tất cả dữ liệu từ bảng "hotels"
         return view('home', ['hotels' => $hotels]);
     }
 }

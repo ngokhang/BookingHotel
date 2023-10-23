@@ -25,7 +25,7 @@ class ForgotPasswordRequest extends FormRequest
     {
         return [
             //
-            'email' => 'required|email'
+            'email' => 'required|email|alpha_dash'
         ];
     }
 }
