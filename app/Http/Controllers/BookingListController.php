@@ -9,6 +9,7 @@ class BookingListController extends Controller
 {
     public function index()
     {
+
         $bookingPendingList = Booking::with(['hotel' => function ($query) {
             $ownerId = 1; // Auth::user()->id
             return $query->where('owner_id', $ownerId);
