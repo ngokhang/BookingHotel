@@ -93,12 +93,16 @@ Route::post('/booking/store', [UserBookingController::class, 'store'])->name('bo
 // Owner hotel - chu khach san
 Route::prefix('owner')->group(function () {
     // Show profile owner
-    Route::get('/profile', [OwnerController::class, 'show'])->name('owner.show');
+    // Route::get('/profile', [OwnerController::class, 'show'])->name('owner.show');
 
     // trang chỉnh sửa thông tin khách sạn
     Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotel.edit');
-    // lưu thông tin chỉnh sửa
+    // cập nhật thông tin khách sạn
     Route::put('/hotels/{hotel}', [HotelController::class, 'update'])->name('hotel.update');
+    // xóa khách sạn
+    Route::delete('/hotels/{hotel}', [HotelController::class, 'destroy'])->name('hotel.destroy');
+    // thêm khách sạn
+    Route::get('/add-hotel', [OwnerManageBookingController::class, 'create'])->name('add-hotel');
 
     // danh sách khách sạn của chủ khách sạn
     Route::get('/hotels', [OwnerManageBookingController::class, 'index'])->withTrashed()->name('owner_manage.index');
