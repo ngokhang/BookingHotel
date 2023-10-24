@@ -16,12 +16,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('role')->default('user');
             $table->string('username');
             $table->string('password');
             $table->string('email');
-            $table->string('email_verified_at');
-            $table->string('remember_token');
-            $table->timestamps();
+            $table->string('email_verified_at')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->softDeletes();
         });
     }
 

@@ -15,6 +15,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BookingListController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\OwnerManageBookingController;
+use App\Http\Controllers\OwnerPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,7 +94,7 @@ Route::post('/booking/store', [UserBookingController::class, 'store'])->name('bo
 // Owner hotel - chu khach san
 Route::prefix('owner')->group(function () {
     // trang đổi mật khẩu chủ khách sạn
-    Route::get('/change-password', [OwnerController::class, 'edit'])->name('owner.edit');
+    Route::get('/change-password', [OwnerPasswordController::class, 'edit'])->name('owner.edit');
     // trang chỉnh sửa thông tin khách sạn
     Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotel.edit');
     // cập nhật thông tin khách sạn
@@ -114,3 +115,9 @@ Route::prefix('owner')->group(function () {
     // trả phòng
     Route::delete('/manage-booking/{hotel_id}/checkout/{booking_id}', [OwnerManageBookingController::class, 'destroy'])->name('owner_manage.destroy');
 });
+
+/**
+ * Route admin
+ */
+
+require __DIR__ . './admin.php';

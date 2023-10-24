@@ -54,9 +54,9 @@ class ProfileUserController extends Controller
             $path = $fileAvatar->move('uploads/avatar', $fileAvatarName);
         }
         if ($res) {
-            return redirect()->back()->with('success', 'Created successfully!');
+            return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');
         }
-        return redirect()->back()->with('error', 'Update failed! Check your infomation');
+        return redirect()->back()->with('error', 'Cập nhật thông tin thất bại');
     }
 
     public function updateAvatar()
