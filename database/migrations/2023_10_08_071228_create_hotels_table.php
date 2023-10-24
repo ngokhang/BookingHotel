@@ -31,7 +31,7 @@ return new class extends Migration
             $table->unsignedBigInteger('owner_id')->nullable();
             $table->boolean('admin_accepted')->default(false);
 
-            $table->foreign('owner_id')->references('id')->on('users');
+            $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

@@ -27,7 +27,7 @@ class HotelRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', new StringValidRule("Tên khách sạn")],
+            'name' => ['required', new StringValidRule("Tên khách sạn"), 'unique:hotels,name'],
             'city' => ['required', new StringValidRule("Thành phố")],
             'country' => ['required_with:city', new StringValidRule("Quốc gia")],
             'description' => 'required|string|max:2500|min:2',
@@ -42,6 +42,7 @@ class HotelRequest extends FormRequest
     {
         return [
             'name.required' => 'Vui lòng nhập tên khách sạn',
+            'name.unique' => 'Tên khách sạn đã tồn tại',
             'city.required' => 'Vui lòng nhập thành phố',
             'country.required_with' => 'Vui lòng nhập quốc gia',
             'description.required' => 'Vui lòng mô tả khách sạn',
