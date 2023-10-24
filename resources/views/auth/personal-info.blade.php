@@ -34,6 +34,11 @@
                         value="{{ $dataUser->userInfo->phone_number }}">
                 </div>
                 <div class="form-input">
+                    <label for="address">Address</label>
+                    <input type="text" name="address" id="address" placeholder="Address"
+                        value="{{ $dataUser->userInfo->address }}">
+                </div>
+                <div class="form-input">
                     <label for="dob">Birthday</label>
                     <input type="date" name="dob" id="dob" value="{{ $dataUser->userInfo->dob }}">
                 </div>
