@@ -14,7 +14,7 @@
                 <a href="{{ route('admin_user.index') }}" class="sidebar-owner__link">Quản lý tài khoản người dùng</a>
             </div>
             <div class="sidebar-owner__item">
-                <a href="#" class="sidebar-owner__link">Chưa nghĩ ra</a>
+                <a href="{{ route('admin.approve_hotels') }}" class="sidebar-owner__link">Quản lí khách sạn</a>
             </div>
             <div class="owner-logout">
                 <a href="#" class="sidebar-owner__link">Đăng xuất</a>
@@ -22,7 +22,7 @@
         </div>
 
         <div class="table-admin">
-            <h3>Danh sách tài khoản chủ khách sạn</h3>
+            <h3>Danh sách tài khoản người dùng</h3>
             <table class="admin-table">
                 <thead>
                     <tr>
@@ -41,7 +41,6 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->created_at }}</td>
                             <td>
-                                <a href="{{ route('admin_user.edit', ['user' => $user->id]) }}" class="btn btn-edit">Sửa</a>
                                 <form action="{{ route('admin_user.delete', ['user' => $user->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')

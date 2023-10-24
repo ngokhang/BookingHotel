@@ -39,7 +39,7 @@
                         <tr>
                             <td>{{ $booking->id }}</td>
                             <td>{{ $booking->hotel->name }}</td>
-                            <td>{{ $booking->customer->name }}</td>
+                            <td>{{ $booking->customer->username }}</td>
                             <td>{{ $booking->check_in }}</td>
                             <td>{{ $booking->check_out }}</td>
                             <td>${{ $booking->total_cost }}</td>

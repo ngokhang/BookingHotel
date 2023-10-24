@@ -17,6 +17,7 @@ use App\Http\Controllers\BookingListController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\OwnerManageBookingController;
 use App\Http\Controllers\OwnerPasswordController;
+use App\Http\Controllers\ApproveHotelController;
 
 
 /*
@@ -139,17 +140,18 @@ Route::prefix('admin')->group(function () {
         Route::put('/account/{user}', [OwnerController::class, 'update'])->name('admin_owner.update');
         // Xoa
         Route::delete('/account/{user}', [OwnerController::class, 'destroy'])->name('admin_owner.delete');
+        //trang duỵệt khách sạn
+        Route::get('/approve-hotels', [ApproveHotelController::class, 'index'])->name('admin.approve_hotels');
+        //duyệt khách sạn
+        Route::put('/approve-hotel/{hotel}', [ApproveHotelController::class, 'approve'])->name('admin.approve_hotel');
     });
 
     // localhost:8000/admin/user
     Route::prefix('user')->group(function () {
         // Lấy danh sách của tất cả user
         Route::get('/', [UserController::class, 'index'])->withTrashed()->name('admin_user.index');
-        // Hiển thị trang chi tiết 1 tài khoản để sửa
-        Route::get('/{user}/edit', [UserController::class, 'edit'])->name('admin_user.edit');
-        // Sua thong tin
-        Route::put('/{user}', [ProfileUserController::class, 'update'])->name('admin_user.update');
         // Xoa
         Route::delete('/{user}', [UserController::class, 'destroy'])->name('admin_user.delete');
     });
+
 });

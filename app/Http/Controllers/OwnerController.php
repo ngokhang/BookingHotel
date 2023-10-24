@@ -21,7 +21,7 @@ class OwnerController extends Controller
     public function index()
     {
         $ownerList = User::withTrashed()->where('role', 'owner')->paginate(10);
-        return view('admin.admin_manage', compact('ownerList'));
+        return view('admin.admin_manage-owner', compact('ownerList'));
     }
 
     /**
