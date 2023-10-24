@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\FileImageValidRule;
+use App\Rules\StringValidRule;
+use App\Rules\UnsignedIntRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class HotelRequest extends FormRequest
@@ -24,14 +27,30 @@ class HotelRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
-            'description' => 'required|string|max:1000',
-            'check_in_date' => 'date',
-            'price' => 'required|string|alpha_dash',
-            'num_guest' => 'required|string|alpha_dash',
-            'image' => 'array'
+            'name' => ['required', new StringValidRule("Tên khách sạn")],
+            'city' => ['required', new StringValidRule("Thành phố")],
+            'country' => ['required_with:city', new StringValidRule("Quốc gia")],
+            'description' => 'required|string|max:2500|min:2',
+            'check_in_date' => 'required|date',
+            'price' => ['required', new UnsignedIntRule(0, "Giá thuê")],
+            'num_guest' => ['required', new UnsignedIntRule(0, "Số lượng khách")],
+            'image' => ['required', 'array', new FileImageValidRule]
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Vui lòng nhập tên khách sạn',
+            'city.required' => 'Vui lòng nhập thành phố',
+            'country.required_with' => 'Vui lòng nhập quốc gia',
+            'description.required' => 'Vui lòng mô tả khách sạn',
+            'description.max' => "Mô tả quá dài",
+            'description.min' => "Mô tả quá ngắn",
+            'check_in_date.required' => 'Vui lòng nhập ngày có thể đặt phòng',
+            'price.required' => 'Vui lòng nhập giá phòng',
+            'num_guest.required' => 'Vui lòng nhập số lượng khách',
+            'image.required' => 'Vui lòng upload ảnh',
         ];
     }
 }

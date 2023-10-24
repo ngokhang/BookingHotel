@@ -66,7 +66,7 @@ Route::prefix('account')->group(function () {
     // Personal info
     Route::get('/', [ProfileUserController::class, 'index'])->name('profile.index');
     Route::get('/personal', [ProfileUserController::class, 'edit'])->name('profile.edit');
-    Route::put('/{id}', [ProfileUserController::class, 'update'])->name('profile.update');
+    Route::put('personal/{id}', [ProfileUserController::class, 'update'])->name('profile.update');
     // Password
     Route::get('/password', [PasswordController::class, 'edit'])->name('password.edit');
     Route::put('/password', [PasswordController::class, 'update'])->name('password.update');

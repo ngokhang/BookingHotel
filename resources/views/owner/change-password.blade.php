@@ -28,24 +28,24 @@
                     @method('PUT')
                     @csrf
                     <div class="form-title">
-                        <h4>Change password</h4>
+                        <h4>Thay đổi mật khẩu</h4>
                     </div>
                     <div class="form-input">
-                        <label for="current_password">Current password</label>
+                        <label for="current_password">Mật khẩu hiện tại</label>
                         <input type="password" name="current_password" id="current_password"
                             placeholder="Current password" />
                     </div>
                     <div class="form-input">
-                        <label for="new_password">New password</label>
+                        <label for="new_password">Mật khẩu mới</label>
                         <input type="password" name="new_password" id="new_password" placeholder="New password">
                     </div>
                     <div class="form-input">
-                        <label for="new_password_">Confirm new password</label>
+                        <label for="new_password_">Nhập lại mật khẩu mới</label>
                         <input type="password" name="new_password_confirmation" id="new_password_confirm"
                             placeholder="Confirm new password">
                     </div>
                     <div class="form-btn">
-                        <button class="button-submit">Change</button>
+                        <button class="button-submit">Thay đổi</button>
                     </div>
                 </form>
             </section>
