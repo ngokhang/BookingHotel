@@ -24,14 +24,12 @@ class DatabaseSeeder extends Seeder
         User::create([
             'username' => fake()->userName(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => bcrypt('123456'),
             'role' => 'owner',
         ]);
         User::create([
             'username' => fake()->userName(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => bcrypt('123456'),
             'role' => 'owner',
         ]);
@@ -40,7 +38,6 @@ class DatabaseSeeder extends Seeder
         User::create([
             'username' => 'admin',
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => bcrypt('123456'),
             'role' => 'admin',
         ]);

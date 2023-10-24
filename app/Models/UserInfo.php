@@ -10,7 +10,7 @@ class UserInfo extends Model
     use HasFactory;
 
     protected $table = 'users_info';
-    protected $fillable = ['first_name', 'last_name', 'dob', "address"];
+    protected $fillable = ['first_name', 'last_name', 'dob', "address", 'user_id', 'address', 'phone_number'];
 
     public function user()
     {

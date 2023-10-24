@@ -139,18 +139,17 @@ Route::prefix('admin')->group(function () {
         Route::put('/account/{user}', [OwnerController::class, 'update'])->name('admin_owner.update');
         // Xoa
         Route::delete('/account/{user}', [OwnerController::class, 'destroy'])->name('admin_owner.delete');
-
     });
 
     // localhost:8000/admin/user
     Route::prefix('user')->group(function () {
         // Lấy danh sách của tất cả user
-        Route::get('/accounts', [UserController::class, 'index'])->withTrashed()->name('admin_user.index');
+        Route::get('/', [UserController::class, 'index'])->withTrashed()->name('admin_user.index');
         // Hiển thị trang chi tiết 1 tài khoản để sửa
-        Route::get('/account/{id}', [UserController::class, 'edit'])->name('admin_user.edit');
+        Route::get('/{user}/edit', [UserController::class, 'edit'])->name('admin_user.edit');
         // Sua thong tin
-        Route::put('/account/{id}', [ProfileUserController::class, 'update'])->name('admin_user.update');
+        Route::put('/{user}', [ProfileUserController::class, 'update'])->name('admin_user.update');
         // Xoa
-        Route::delete('/account/{id}', [UserController::class, 'destroy'])->name('admin_user.delete');
+        Route::delete('/{user}', [UserController::class, 'destroy'])->name('admin_user.delete');
     });
 });

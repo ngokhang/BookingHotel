@@ -40,8 +40,14 @@ class ProfileUserController extends Controller
      */
     public function update(ProfileUserRequest $request, $id)
     {
-        $res = UserInfo::where('id', $request->user_id)->update($request->except(['_token', '_method', 'avatar', 'email']));
-        User::where('id', $request->user_id)->update(['email' => $request->email]);
+        $res = UserInfo::updateOrCreate(['user_id' => $id], [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone_number' => $request->phone_number,
+            'dob' => $request->dob,
+            'address' => $request->address
+        ]);
+        User::where('id', $id)->update(['email' => $request->email]);
         $fileAvatar = $request->file('avatar');
         if ($fileAvatar) {
             $fileAvatarName = implode('', array($request->first_name, $request->last_name)) . '.' . $fileAvatar->getClientOriginalExtension();
