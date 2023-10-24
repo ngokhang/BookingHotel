@@ -20,7 +20,8 @@ class OwnerController extends Controller
     public function index()
     {
         $ownerList = User::withTrashed()->where('role', 'owner')->paginate(10);
-        return $ownerList;
+        return view('admin.admin_manage', compact('ownerList'));
+
     }
 
     /**
@@ -30,7 +31,7 @@ class OwnerController extends Controller
      */
     public function create()
     {
-        return "Đây là trang tạo tài khoản của admin cho chủ khách sạn";
+        return view('admin.add_owner-hotel');
     }
 
     /**
@@ -71,7 +72,7 @@ class OwnerController extends Controller
     {
         $owner = User::find($id);
 
-        return $owner;
+        return view('admin.edit_owner-hotel', compact('owner'));
     }
 
     /**
