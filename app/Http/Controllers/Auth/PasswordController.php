@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PasswordRequest;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -33,7 +33,7 @@ class PasswordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PasswordRequest $request)
+    public function update(ChangePasswordRequest $request)
     {
         //
         $user = User::find(1);
@@ -42,12 +42,12 @@ class PasswordController extends Controller
             $newPassword = $request->new_password;
             $res = $user->update(['password' => bcrypt($newPassword)]);
             if ($res) {
-                return redirect()->back()->with('success', "Your password has changed");
+                return redirect()->back()->with('success', "Thay đổi mật khẩu thành công");
             } else {
-                return redirect()->back()->with('error', "Oops!!An error has occurred");
+                return redirect()->back()->with('error', "Thay đổi mật khẩu thất bại");
             }
         } else {
-            return redirect()->back()->with('error', "Oops!!Your current password is invalid");
+            return redirect()->back()->with('error', "Mật khẩu hiện tại không đúng");
         }
     }
 }
