@@ -1,6 +1,7 @@
 @extends('layout.owner')
 
 @section('content')
+    <x-alert-errors />
     <div class="container-owner">
         <div class="sidebar-owner">
             <h2>ADMIN DASHBOARD</h2>
@@ -11,7 +12,7 @@
                 <a href="{{ route('admin_owner.create') }}" class="sidebar-owner__link">Thêm tài khoản chủ khách sạn</a>
             </div>
             <div class="sidebar-owner__item">
-                <a href="#" class="sidebar-owner__link">Quản lý tài khoản người dùng</a>
+                <a href="{{ route('admin_user.index') }}" class="sidebar-owner__link">Quản lý tài khoản người dùng</a>
             </div>
             <div class="sidebar-owner__item">
                 <a href="#" class="sidebar-owner__link">Chưa nghĩ ra</a>

@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-input">
                     <label for="last_name">Lastname</label>
-                    <input type=text" name="last_name" id="last_name" placeholder="Lastname"
+                    <input type="text" name="last_name" id="last_name" placeholder="Lastname"
                         value="{{ $dataUser->userInfo->last_name }}">
                 </div>
                 <div class="form-input">

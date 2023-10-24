@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUserRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UpdateOwnerRequest;
 use App\Models\Avatar;
 use App\Models\User;
 use App\Models\UserInfo;
@@ -21,7 +22,6 @@ class OwnerController extends Controller
     {
         $ownerList = User::withTrashed()->where('role', 'owner')->paginate(10);
         return view('admin.admin_manage', compact('ownerList'));
-
     }
 
     /**
@@ -47,9 +47,10 @@ class OwnerController extends Controller
     public function store(RegisterRequest $request)
     {
         $newOwner = new User;
+        $newOwner->role = 'owner';
         $newOwner->fill($request->all());
 
-        return $newOwner->save() ? Alert::success('Tạo tài khoản thành công', 'Ok để tiếp tục') : Alert::error('Tạo tài khoản thất bại', 'Vui lòng thử lại sau');
+        return $newOwner->save() ? redirect()->back()->with('success', 'Tạo thành công') : redirect()->back()->with('error', 'Vui lòng thử lại sau');
     }
 
     /**
@@ -82,21 +83,10 @@ class OwnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProfileUserRequest $request, $id)
+    public function update(UpdateOwnerRequest $request, $id)
     {
-        $res = UserInfo::updateOrCreate(['user_id', $id], $request->except(['_token', '_method', 'avatar', 'email']));
-        User::where('id', $request->user_id)->update(['email' => $request->email]);
-        $fileAvatar = $request->file('avatar');
-        if ($fileAvatar) {
-            $fileAvatarName = implode('', array($request->first_name, $request->last_name)) . '.' . $fileAvatar->getClientOriginalExtension();
-            Avatar::updateOrCreate(['name' => $request->first_name . '' . $request->last_name], [
-                'user_id' => $id,
-                'path' => 'uploads/avatar',
-                'name' => $request->first_name . '' . $request->last_name,
-                'extension' => $fileAvatar->getClientOriginalExtension()
-            ]);
-            $fileAvatar->move('uploads/avatar', $fileAvatarName);
-        }
+        $res = User::where('id', $id)->update(['email' => $request->email, 'username' => $request->username]);
+
         if ($res) {
             return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');
         }

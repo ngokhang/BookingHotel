@@ -34,16 +34,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($ownerList as $owner)
+                    @foreach ($listUser as $user)
                         <tr>
-                            <td>{{ $owner->id }}</td>
-                            <td>{{ $owner->username }}</td>
-                            <td>{{ $owner->email }}</td>
-                            <td>{{ $owner->created_at }}</td>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->username }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->created_at }}</td>
                             <td>
-                                <a href="{{ route('admin_owner.edit', ['user' => $owner->id]) }}"
-                                    class="btn btn-edit">Sửa</a>
-                                <form action="{{ route('admin_owner.delete', ['user' => $owner->id]) }}" method="POST">
+                                <a href="{{ route('admin_user.edit', ['user' => $user->id]) }}" class="btn btn-edit">Sửa</a>
+                                <form action="{{ route('admin_user.delete', ['user' => $user->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-delete">Xóa</button>
@@ -53,7 +52,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $ownerList->links() }}
+            {{ $listUser->links() }}
         </div>
     </div>
 @endsection
