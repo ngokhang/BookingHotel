@@ -28,7 +28,7 @@
                         <button class="index-button" idx="1"></button>
                         <button class="index-button" idx="2"></button>
                     </div>
-                    {{-- logo favorite hotel --}}
+                    <!-- icon yêu thích -->
                     <div class="favorite-hotel">
                         <i class="far fa-heart" style="color: #fdfdfd"></i>
                     </div>

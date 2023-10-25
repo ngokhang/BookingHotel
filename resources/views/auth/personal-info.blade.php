@@ -12,15 +12,15 @@
                 @csrf
                 <input type="hidden" name="user_id" id="user_id" value="{{ $dataUser->id }}">
                 <div class="form-title">
-                    <h4>Personal information</h4>
+                    <h4>Thông tin cá nhân</h4>
                 </div>
                 <div class="form-input">
-                    <label for="first_name">Firstname</label>
+                    <label for="first_name">Họ</label>
                     <input type="text" name="first_name" id="first_name" placeholder="Firstname"
                         value="{{ $dataUser->userInfo->first_name ?? '' }}" />
                 </div>
                 <div class="form-input">
-                    <label for="last_name">Lastname</label>
+                    <label for="last_name">Tên</label>
                     <input type="text" name="last_name" id="last_name" placeholder="Lastname"
                         value="{{ $dataUser->userInfo->last_name ?? '' }}">
                 </div>
@@ -29,28 +29,28 @@
                     <input type="email" name="email" id="email" placeholder="Email" value="{{ $dataUser->email }}">
                 </div>
                 <div class="form-input">
-                    <label for="phone_number">Telephone</label>
+                    <label for="phone_number">Số điện thoại</label>
                     <input type="text" name="phone_number" id="phone_number" placeholder="Telephone"
                         value="{{ $dataUser->userInfo->phone_number ?? '' }}">
                 </div>
                 <div class="form-input">
-                    <label for="address">Address</label>
+                    <label for="address">Địa chỉ</label>
                     <input type="text" name="address" id="address" placeholder="Address"
                         value="{{ $dataUser->userInfo->address ?? '' }}">
                 </div>
                 <div class="form-input">
-                    <label for="dob">Birthday</label>
+                    <label for="dob">Ngày sinh</label>
                     <input type="date" name="dob" id="dob" value="{{ $dataUser->userInfo->dob ?? '' }}">
                 </div>
                 <div class="form-input input-file">
-                    <label for="avatar">Avatar</label>
+                    <label for="avatar">Ảnh đại diện</label>
                     <input type="file" name="avatar" id="avatar">
                 </div>
                 <div class="preview-img">
-                    <img src="{{ asset('uploads/avatar/' . $avatar) }}" alt="user_avatar">
+                    <img src="{{ asset('uploads/avatar/' . $avatar) }}" alt="Ảnh người dùng">
                 </div>
                 <div class="form-btn">
-                    <button class="button-submit">Update</button>
+                    <button class="button-submit">Cập nhật</button>
                 </div>
             </form>
         </section>
