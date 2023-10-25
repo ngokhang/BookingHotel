@@ -8,8 +8,11 @@
             <div class="title">
                 <div class="title-account">Quản lý tài khoản</div>
                 <p class="title-info">
-                    <span class="fullname">{{ $dataUser->username }} - </span>
-                    <span class="email">{{ $dataUser->email }}</span>
+                    <span class="fullname">{{ $dataUser->username }}</span>
+                    <span class="email">
+                        @if ($dataUser->email)
+                            - {{ $dataUser->email }}
+                        @endif
                     </span>
                 </p>
             </div>

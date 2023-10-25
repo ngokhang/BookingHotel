@@ -255,9 +255,12 @@ header ul {
 .menu-acount_item {
     display: flex;
     align-items: center;
-    padding: 8px 16px;
     font-size: 1rem;
     line-height: 1.8rem;
+}
+
+.menu-acount_item>a {
+    padding: 8px 16px;
 }
 
 .menu-acount_item:hover {

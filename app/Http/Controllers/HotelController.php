@@ -80,6 +80,12 @@ class HotelController extends Controller
 
         if ($request->hasFile('image')) {
             $imagePaths = [];
+
+            // Đảm bảo rằng người dùng đã chọn đủ 3 ảnh
+            if (count($request->file('image')) !== 3) {
+                return redirect()->back()->with('error', 'Chưa chọn đủ 3 ảnh.');
+            }
+
             // Lặp qua từng hình ảnh và lưu chúng vào thư mục và cơ sở dữ liệu
             foreach ($request->file('image') as $index => $image) {
                 $index++;
@@ -100,6 +106,8 @@ class HotelController extends Controller
             $newHotel->image1 = $imagePaths[0];
             $newHotel->image2 = $imagePaths[1];
             $newHotel->image3 = $imagePaths[2];
+        } else {
+            return redirect()->back()->with('error', 'Chưa chọn đủ ảnh.');
         }
 
         $resultCreate = $newHotel->save();
