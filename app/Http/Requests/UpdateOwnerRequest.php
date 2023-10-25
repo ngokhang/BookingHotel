@@ -26,8 +26,7 @@ class UpdateOwnerRequest extends FormRequest
      */
     public function rules()
     {
-        $currentEmail = User::find(9)->email; //Auth::user()->email;
-        $userId = 9;
+        $userId = Auth::user()->id;
         return [
             'username' => ['required', new StringValidRule("Tên đăng nhập"), 'regex:/^[a-zA-Z0-9]+$/i'],
             'email' => ['required', 'email', "unique:users,email,$userId"],
