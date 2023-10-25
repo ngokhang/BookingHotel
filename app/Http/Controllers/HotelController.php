@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\HotelRequest;
 use App\Models\Avatar;
 use App\Models\Hotel;
-use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class HotelController extends Controller
 {
@@ -77,7 +76,7 @@ class HotelController extends Controller
     {
         $newHotel = new Hotel;
         $newHotel->fill($request->all());
-        $newHotel->owner_id = 1; // Auth::user()->id
+        $newHotel->owner_id = Auth::user()->id;
 
         if ($request->hasFile('image')) {
             $imagePaths = [];
@@ -90,7 +89,7 @@ class HotelController extends Controller
                 $image->move('uploads/images/hotels/', $imageName);
                 // Lưu thông tin hình ảnh vào cơ sở dữ liệu
                 Avatar::updateOrCreate([
-                    'user_id' => 1, // Auth::user()->id
+                    'user_id' => Auth::user()->id,
                     'path' => $imagePath,
                     'name' => 'hotel-' . mb_strtolower($newHotel->country) . '-' . mb_strtolower($newHotel->city) . '-' . $imageName,
                     'extension' => $image->getClientOriginalExtension(),

@@ -33,7 +33,6 @@ class UserBookingController extends Controller
             return $query->where('id', 3);
         }])->withTrashed()->paginate(5);
         return view('user.booking-list', compact('userBookingData', 'histories'));
-        // return $histories;
     }
 
     /**
@@ -59,7 +58,7 @@ class UserBookingController extends Controller
     // $user_id = auth()->user()->id; // Lấy ID của người dùng hiện tại
     public function store(BookingRequest $request)
     {
-        $user_id = 1; // Thay thế bằng cách lấy ID của người dùng hiện tại, ví dụ: $user_id = auth()->user()->id;
+        $user_id = auth()->user()->id; 
         $hotel_id = $request->input('hotel_id');
         $check_in_date = $request->input('check_in_date');
         $check_out_date = $request->input('check_out_date');
@@ -136,7 +135,7 @@ class UserBookingController extends Controller
         $feedbackContent = $request->feedback_input;
         $result = Evaluation::updateOrCreate(
             ['hotel_id' => $hotel_id],
-            ['user_id' => 4, 'feedback' => $feedbackContent, 'point' => $pointRate]
+            ['user_id' => auth()->user()->id, 'feedback' => $feedbackContent, 'point' => $pointRate]
         );
 
         if ($result) {

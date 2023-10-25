@@ -15,7 +15,7 @@
         <tbody>
             @foreach ($userBookingData as $data)
                 @include('user.detail-booking', ['data' => $data])
-                @if ($data->hotel->deleted_at)
+                @if ($data->deleted_at == null)
                     <tr class="hotel current-booking" data-target="infor-{{ $data->id }}">
                         <td><a href="#">{{ $data->hotel->name }}</a></td>
                         <td><a href="#">{{ $data->hotel->city }} , {{ $data->hotel->country }}</a></td>
