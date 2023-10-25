@@ -13,7 +13,6 @@
         </svg>
     </div>
     <div class="swiper">
-        <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
             <div class="swiper-slide">

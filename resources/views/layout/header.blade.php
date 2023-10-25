@@ -47,7 +47,6 @@
                                 <li class="search-price-item"><a
                                         href="{{ route('search', ['price' => 'over300']) }}">Trên $300</a></li>
                             </ul>
-
                         </div>
                     </li>
                     <li class="header-search-item">
@@ -60,14 +59,13 @@
         {{-- thông tin --}}
         <div class="header-info">
             <div class="header-info_web">
-                <a href="#">Cho thuê chỗ ở qua Airbnb</a>
+                <a href="#">Liên hệ qua Airbnb</a>
                 <i class="fas fa-globe-europe" style="color: #333333"></i>
             </div>
             <div class="header-infor-user">
                 <div class="info-user">
                     <i class="fas fa-bars" style="color: #06070a"></i>
                     @auth
-                        {{-- <img src="{{ asset('uploads/avatar/' . $avatar) }}" alt=""> --}}
                     @endauth
                     @guest
                         <i class="fas fa-user-circle" style="color: #717171"></i>
