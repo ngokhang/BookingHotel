@@ -28,6 +28,7 @@ class RegisterRequest extends FormRequest
         return [
             'username' => ['required', 'unique:users,username', 'regex:/^[a-zA-Z0-9]+$/i', new StringValidRule("Tên đăng nhập")],
             'password' => 'required|min:3|max:30|confirmed',
+            'email' => ['required', 'unique:users,email', 'email', 'max:255', 'min:5'],
             'password_confirmation' => 'required'
         ];
     }
