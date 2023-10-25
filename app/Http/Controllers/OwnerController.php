@@ -48,7 +48,8 @@ class OwnerController extends Controller
     {
         $newOwner = new User;
         $newOwner->role = 'owner';
-        $newOwner->fill($request->all());
+        $newOwner->password = bcrypt($request->password);
+        $newOwner->fill($request->except(['password']));
 
         return $newOwner->save() ? redirect()->back()->with('success', 'Tạo thành công') : redirect()->back()->with('error', 'Vui lòng thử lại sau');
     }
