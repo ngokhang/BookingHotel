@@ -23,11 +23,12 @@ class ProfileUserRequest extends FormRequest
      */
     public function rules()
     {
+        $userId = 9;
         return [
             //
             'first_name' => 'required|string|max:255|min:2',
             'last_name' => 'required|string|max:255|min:2',
-            'email' => "required|email|max:255",
+            'email' => "required|email|max:255|unique:users,email,$userId",
             'profile_address' => 'string|max:255|min:10',
             'profile_phonenumber' => 'string|max:11|min:10|regex:/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/',
         ];
