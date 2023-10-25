@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li class="settings-item">
-                    <a href="{{ route('password.edit') }}" class="settings-item-link">
+                    <a href="{{ route('password.edit', ['user' => $dataUser]) }}" class="settings-item-link">
                         <div class="icon">
                             <svg xmlns="http://www.w3.org/2000/svg" height="30px"
                                 viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->

@@ -67,8 +67,8 @@ Route::prefix('account')->middleware(['auth'])->group(function () {
     Route::get('/personal/{user}', [ProfileUserController::class, 'edit'])->name('profile.edit');
     Route::put('personal/{user}', [UserController::class, 'update'])->name('profile.update');
     // trang đổi mật khẩu
-    Route::get('/password', [PasswordController::class, 'edit'])->name('password.edit');
-    Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
+    Route::get('{user}/password', [PasswordController::class, 'edit'])->name('password.edit');
+    Route::put('{user}/password', [PasswordController::class, 'update'])->name('password.update');
     // trang đặt phòng của người dùng
     Route::get('/your-booking', [UserBookingController::class, 'index'])->withTrashed()->middleware(['role:user'])->name('booking.index');
     Route::delete('your-booking/{booking_id}', [UserBookingController::class, 'destroy'])->middleware(['role:user'])->name('booking.destroy');
@@ -85,7 +85,7 @@ Route::get('/search', [SearchController::class, 'index'])->name('search');
 Route::get('/hotel/{id}', [HotelController::class, 'show'])->withTrashed()->name('hotel.show');
 //trang đặt phòng
 Route::get('/booking/create/{hotel_id}', [UserBookingController::class, 'create'])->name('booking.create');
-Route::post('/booking/store', [UserBookingController::class, 'store'])->name('booking.store');
+Route::post('/booking/store', [UserBookingController::class, 'store'])->middleware(['auth', 'role:user'])->name('booking.store');
 
 // Owner hotel - chu khach san
 Route::prefix('owner')->middleware(['role:owner'])->group(function () {
@@ -94,7 +94,7 @@ Route::prefix('owner')->middleware(['role:owner'])->group(function () {
         return view('owner.dashboard', ['user' => Auth::user()]);
     })->name('owner.dashboard');
     // trang đổi mật khẩu chủ khách sạn
-    Route::get('/change-password', [OwnerPasswordController::class, 'edit'])->name('owner.edit');
+    Route::get('{user}/change-password', [OwnerPasswordController::class, 'edit'])->name('owner.edit');
     // trang cập nhật thông tin khách sạn
     Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotel.edit');
     // cập nhật thông tin khách sạn

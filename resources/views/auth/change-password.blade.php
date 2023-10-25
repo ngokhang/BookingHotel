@@ -4,7 +4,7 @@
     <div class="wrapper container">
         <section id="form-update">
             <x-alert-errors />
-            <form action="{{ route('password.update') }}" method="POST" id="form">
+            <form action="{{ route('password.update', ['user' => $dataUser]) }}" method="POST" id="form">
                 @method('PUT')
                 @csrf
                 <div class="form-title">

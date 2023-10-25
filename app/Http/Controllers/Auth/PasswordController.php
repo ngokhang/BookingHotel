@@ -17,13 +17,9 @@ class PasswordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request, User $user)
     {
-        //
-        $user = User::with(['userInfo', 'avatar'])->where('id', 1)->first();
-        $avatar = $user->avatar ? $user->avatar->name . '.' . $user->avatar->extension : 'not_upload';
-        $fullname = $user->userInfo->first_name . ' ' . $user->userInfo->last_name;
-        return view('auth.change-password', ['dataUser' => $user, 'fullname' => $fullname, 'avatar' => $avatar]);
+        return view('auth.change-password', ['dataUser' => $user]);
     }
 
     /** 
@@ -33,10 +29,8 @@ class PasswordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ChangePasswordRequest $request)
+    public function update(ChangePasswordRequest $request, User $user)
     {
-        //
-        $user = User::find(1);
         $validPassword = Hash::check($request->current_password, $user->password);
         if ($validPassword) {
             $newPassword = $request->new_password;
