@@ -46,7 +46,7 @@
                                         method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <input type="hidden" name="admin_accepted" value="true"> <!-- Thêm trường này -->
+                                        {{-- <input type="hidden" name="admin_accepted" value="true"> <!-- Thêm trường này --> --}}
                                         <button type="submit" class="btn btn-primary">Accept</button>
                                     </form>
                                 </td>
