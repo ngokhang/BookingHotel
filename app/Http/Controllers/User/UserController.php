@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $listUser = User::withTrashed()->paginate(10);
+        $listUser = User::withTrashed()->where('role', '!=', 'admin')->paginate(10);
         return view('admin.admin_manage-user', compact('listUser'));
     }
 

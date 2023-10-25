@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Rules\StringValidRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class RegisterRequest extends FormRequest
 {

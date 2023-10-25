@@ -48,6 +48,9 @@
                             @if ($hotel->admin_accepted == false && !$hotel->deleted_at)
                                 <td>Chưa được đăng bài</td>
                             @endif
+                            @if ($hotel->admin_accepted == false && $hotel->deleted_at)
+                                <td>Chưa được đăng bài</td>
+                            @endif
                             @if ($hotel->admin_accepted == true && $hotel->deleted_at)
                                 <td>Đang cho thuê</td>
                             @endif
@@ -57,7 +60,7 @@
                             <td>${{ $hotel->price }}</td>
                             <td>
                                 <a href="{{ route('hotel.edit', ['hotel' => $hotel->id]) }}" class="btn btn-edit">Sửa</a>
-                                <form action="{{ route('hotel.destroy', ['hotel' => $hotel->id]) }}" method="POST">
+                                <form action="{{ route('hotel.destroy', ['hotel' => $hotel]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-delete">Xóa</button>

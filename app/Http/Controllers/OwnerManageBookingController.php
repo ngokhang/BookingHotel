@@ -80,6 +80,11 @@ class OwnerManageBookingController extends Controller
         try {
             DB::transaction(function () use ($hotel_id, $booking_id) {
                 Booking::where('id', $booking_id)->update(['accepted' => 1]);
+                DB::table('bookings')
+                    ->where('hotel_id', $hotel_id)
+                    ->where('id', '!=', $booking_id)
+                    ->where('accepted', 0)
+                    ->delete();
                 Hotel::where('id', $hotel_id)->delete();
             });
             return redirect()->route('booking-list.index')->with('success', 'Cho thuê thành công');
