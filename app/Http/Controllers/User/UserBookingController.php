@@ -8,9 +8,6 @@ use App\Http\Requests\EvaluationRequest;
 use App\Models\Evaluation;
 use App\Models\Hotel;
 use App\Models\Booking;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 

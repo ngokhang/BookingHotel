@@ -17,7 +17,7 @@
                 <a href="{{ route('booking-list.index') }}" class="sidebar-owner__link">Quản lý đơn đặt phòng</a>
             </div>
             <div class="sidebar-owner__item">
-                <a href="{{ route('owner.edit') }}" class="sidebar-owner__link">Thay đổi mật khẩu</a>
+                <a href="{{ route('owner.edit', ['user' => $user]) }}" class="sidebar-owner__link">Thay đổi mật khẩu</a>
             </div>
             <div class="owner-logout">
                 <a href="{{ route('logout') }}" class="sidebar-owner__link">Đăng xuất</a>
@@ -27,7 +27,7 @@
         <div class="table-owner">
             <section id="form-update" class="owner-changepassword">
                 <x-alert-errors />
-                <form action="{{ route('password.update') }}" method="POST" id="form">
+                <form action="{{ route('password.update', ['user' => $user]) }}" method="POST" id="form">
                     @method('PUT')
                     @csrf
                     <div class="form-title">
