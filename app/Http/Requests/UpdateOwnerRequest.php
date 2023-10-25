@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\User;
 use App\Rules\StringValidRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UpdateOwnerRequest extends FormRequest
@@ -24,9 +25,9 @@ class UpdateOwnerRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(Request $request)
     {
-        $userId = Auth::user()->id;
+        $userId = $request->route('user')->id;
         return [
             'username' => ['required', new StringValidRule("Tên đăng nhập"), 'regex:/^[a-zA-Z0-9]+$/i'],
             'email' => ['required', 'email', "unique:users,email,$userId"],

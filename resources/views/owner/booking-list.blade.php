@@ -39,39 +39,41 @@
                 </thead>
                 <tbody>
                     @foreach ($bookingPendingList as $booking)
-                        <tr>
-                            <td>{{ $booking->id }}</td>
-                            <td>{{ $booking->hotel->name }}</td>
-                            <td>{{ $booking->customer->username }}</td>
-                            <td>{{ $booking->check_in }}</td>
-                            <td>{{ $booking->check_out }}</td>
-                            <td>${{ $booking->total_cost }}</td>
-                            @if ($booking->accepted != 2)
-                                <td>
-                                    @if ($booking->accepted == 0)
-                                        <form
-                                            action="{{ route('owner_manage.update', ['hotel_id' => $booking->hotel->id, 'booking_id' => $booking->id]) }}"
-                                            method="POST">
-                                            @method('PUT')
-                                            @csrf
-                                            <button type="submit" class="btn btn-accept">Đồng ý</button>
-                                        </form>
-                                    @elseif ($booking->accepted == 1)
-                                        <form
-                                            action="{{ route('owner_manage.destroy', ['hotel_id' => $booking->hotel->id, 'booking_id' => $booking->id]) }}"
-                                            method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" class="btn btn-checkout">Trả phòng</button>
-                                        </form>
-                                    @endif
-                                </td>
-                            @else
-                                <td>
-                                    <p>Đã trả phòng</p>
-                                </td>
-                            @endif
-                        </tr>
+                        @if ($booking->hotel != null)
+                            <tr>
+                                <td>{{ $booking->id }}</td>
+                                <td>{{ $booking->hotel->name }}</td>
+                                <td>{{ $booking->customer->username }}</td>
+                                <td>{{ $booking->check_in }}</td>
+                                <td>{{ $booking->check_out }}</td>
+                                <td>${{ $booking->total_cost }}</td>
+                                @if ($booking->accepted != 2)
+                                    <td>
+                                        @if ($booking->accepted == 0)
+                                            <form
+                                                action="{{ route('owner_manage.update', ['hotel_id' => $booking->hotel->id, 'booking_id' => $booking->id]) }}"
+                                                method="POST">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-accept">Đồng ý</button>
+                                            </form>
+                                        @elseif ($booking->accepted == 1)
+                                            <form
+                                                action="{{ route('owner_manage.destroy', ['hotel_id' => $booking->hotel->id, 'booking_id' => $booking->id]) }}"
+                                                method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-checkout">Trả phòng</button>
+                                            </form>
+                                        @endif
+                                    </td>
+                                @else
+                                    <td>
+                                        <p>Đã trả phòng</p>
+                                    </td>
+                                @endif
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

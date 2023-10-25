@@ -69,10 +69,9 @@ class OwnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $owner = User::find($id);
-
+        $owner = $user;
         return view('admin.edit_owner-hotel', compact('owner'));
     }
 
@@ -83,9 +82,9 @@ class OwnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOwnerRequest $request, $id)
+    public function update(UpdateOwnerRequest $request, User $user)
     {
-        $res = User::where('id', $id)->update(['email' => $request->email, 'username' => $request->username]);
+        $res = $user->update(['email' => $request->email, 'username' => $request->username]);
 
         if ($res) {
             return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');

@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 
 class UserBookingController extends Controller
 {
@@ -22,16 +23,14 @@ class UserBookingController extends Controller
      */
     public function index()
     {
-        $userBookingData = Booking::with(['customer' => function ($query) {
-            return $query->where('id', 3);
-        }, 'hotel' => function ($query) {
+        $userBookingData = Booking::with(['customer', 'hotel' => function ($query) {
             return $query->withTrashed();
-        }])->withTrashed()->paginate(5);
+        }])->withTrashed()->where('user_id', Auth::user()->id)->paginate(5);
         $histories = Booking::with(['hotel' => function ($query) {
             return $query->withTrashed();
         }, 'customer' => function ($query) {
-            return $query->where('id', 3);
-        }])->withTrashed()->paginate(5);
+            return $query->where('id', Auth::user()->id);
+        }])->withTrashed()->where('user_id', Auth::user()->id)->paginate(5);
         return view('user.booking-list', compact('userBookingData', 'histories'));
     }
 
@@ -58,7 +57,7 @@ class UserBookingController extends Controller
     // $user_id = auth()->user()->id; // Lấy ID của người dùng hiện tại
     public function store(BookingRequest $request)
     {
-        $user_id = auth()->user()->id; 
+        $user_id = auth()->user()->id;
         $hotel_id = $request->input('hotel_id');
         $check_in_date = $request->input('check_in_date');
         $check_out_date = $request->input('check_out_date');

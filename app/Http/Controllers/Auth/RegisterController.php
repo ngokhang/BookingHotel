@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Models\UserInfo;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -36,40 +38,20 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'username' => 'required|unique:users,username|min:5|max:20|regex:/^[a-zA-Z0-9]+$/i',
-            'password' => 'required|min:3|max:30',
-            'confirm_password' => 'required|same:password'
-        ], [
-            'username.required' => 'Vui lòng nhập tài khoản',
-            'username.unique' => 'Tài khoản đã tồn tại',
-            'username.min' => 'Tài khoản phải có ít nhất 5 kí tự',
-            'username.max' => 'Tài khoản không được vượt quá 20 kí tự',
-            'username.regex' => 'Tài khoản không hợp lệ',
-            'password.required' => 'Vui lòng nhập mật khẩu',
-            'password.min' => 'Mật khẩu phải có ít nhất 3 kí tự',
-            'password.max' => 'Mật khẩu không được vượt quá 30 kí tự',
-            'confirm_password.required' => 'Vui lòng nhập lại mật khẩu',
-            'confirm_password.same' => 'Mật khẩu nhập lại không khớp'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->with('error', $validator->errors()->first());
+        try {
+            $user = new User();
+            $userInfo = new UserInfo();
+            $user->fill($request->all());
+            $user->password = bcrypt($request->password);
+            $user->save();
+            $userInfo->user_id = $user->id;
+            $userInfo->save();
+            return redirect()->route('login.create')->with('success', 'Đăng ký thành công');
+        } catch (Exception $e) {
+            return redirect()->back()->with('success', 'Đăng ký thất bại');
         }
-
-        $user = new User();
-        $userInfo = new UserInfo();
-        $user->username = $request->username;
-        $user->password = bcrypt($request->password);
-        $user->email = '';
-
-        $user->save();
-        $userInfo->user_id = $user->id;
-        $userInfo->save();
-
-        return redirect()->route('login.create')->with('success', 'Đăng ký thành công');
     }
 
     /**

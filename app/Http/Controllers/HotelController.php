@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\HotelRequest;
 use App\Models\Avatar;
+use App\Models\Booking;
 use App\Models\Hotel;
+use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HotelController extends Controller
 {
@@ -120,8 +123,15 @@ class HotelController extends Controller
         if ($hotel->deleted_at) {
             return redirect()->route('owner_manage.index')->with('error', 'Khách sạn đang được cho thuê, không thể xóa.');
         }
-        $hotel->forceDelete();
-        return redirect()->route('owner_manage.index')->with('success', 'Xóa khách sạn thành công.');
+        try {
+            DB::transaction(function () use ($hotel) {
+                $hotel->forceDelete();
+                Booking::where('hotel_id', $hotel->id)->delete();
+            });
+            return redirect()->route('owner_manage.index')->with('success', 'Xóa khách sạn thành công.');
+        } catch (Exception $e) {
+            return redirect()->route('owner_manage.index')->with('success', 'Xóa khách sạn thành công.');
+        }
     }
 
 
