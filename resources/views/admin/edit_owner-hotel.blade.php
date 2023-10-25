@@ -15,7 +15,7 @@
                 <a href="{{ route('admin_user.index') }}" class="sidebar-owner__link">Quản lý tài khoản người dùng</a>
             </div>
             <div class="sidebar-owner__item">
-                <a href="#" class="sidebar-owner__link">Chưa nghĩ ra</a>
+                <a href="{{ route('admin.approve_hotels') }}" class="sidebar-owner__link">Quản lý khách sạn</a>
             </div>
             <div class="owner-logout">
                 <a href="#" class="sidebar-owner__link">Đăng xuất</a>

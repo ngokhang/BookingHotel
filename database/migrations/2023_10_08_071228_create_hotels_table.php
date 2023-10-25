@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('city');
             $table->string('country');
-            // $table->integer('distance');
             $table->string('description');
             $table->date('check_in_date');
             $table->integer('price');

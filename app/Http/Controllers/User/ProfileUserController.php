@@ -28,7 +28,6 @@ class ProfileUserController extends Controller
         $avatar = $user->avatar ? $user->avatar->name . '.' . $user->avatar->extension : 'not_upload';
         $fullname = $user->userInfo->first_name . ' ' . $user->userInfo->last_name;
         return view('auth.personal-info', ['dataUser' => $user, 'fullname' => $fullname, 'avatar' => $avatar]);
-        // return $avatar;
     }
 
     /**

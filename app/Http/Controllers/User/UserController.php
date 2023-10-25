@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $listUser = User::withTrashed()->paginate(10);
-        return view('admin.view-user', compact('listUser'));
+        return view('admin.admin_manage-user', compact('listUser'));
     }
 
     /**
@@ -60,7 +60,6 @@ class UserController extends Controller
     {
         $user->load('userInfo');
         return view('admin.edit-user', compact('user'));
-        // return $user;
     }
 
     /**
@@ -83,7 +82,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
         $result = User::find($id)->forceDelete();
         return $result ? redirect()->back()->with('success', 'Xoá thành công!') : redirect()->back()->with('error', 'Xoá thất bại');
     }

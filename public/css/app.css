@@ -1352,7 +1352,6 @@ footer {
 
 .sidebar-owner__item {
   font-size: 1rem;
-  padding: 10px;
   transition: transform 0.3s;
 }
 
@@ -1380,7 +1379,7 @@ footer {
 
 .sidebar-owner__link {
   color: #fff;
-  text-decoration: none;
+  padding: 10px;
   display: block;
 }
 
@@ -1644,7 +1643,7 @@ input[type=file] {
   margin-left: 20px;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 20px;
   background-color: #ffffff;
 }
 

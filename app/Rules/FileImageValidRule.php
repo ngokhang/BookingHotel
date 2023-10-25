@@ -34,7 +34,7 @@ class FileImageValidRule implements Rule
         foreach ($value as $file) {
             // Check if each file is an image with valid extensions
             if (!$this->isValidImage($file)) {
-                dd($file->getClientOriginalName());
+                // dd($file->getClientOriginalName());
                 return false;
             }
         }
