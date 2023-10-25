@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfileUserRequest;
+use App\Models\Avatar;
 use App\Models\User;
+use App\Models\UserInfo;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -69,9 +72,33 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProfileUserRequest $request, User $user)
     {
         //
+        $this->authorize('update', $user);
+        $res = UserInfo::updateOrCreate(['user_id' => $user->id], [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone_number' => $request->phone_number,
+            'dob' => $request->dob,
+            'address' => $request->address
+        ]);
+        $user->update(['email' => $request->email]);
+        $fileAvatar = $request->file('avatar');
+        if ($fileAvatar) {
+            $fileAvatarName = implode('', array($request->first_name, $request->last_name)) . '.' . $fileAvatar->getClientOriginalExtension();
+            Avatar::updateOrCreate(['name' => $request->first_name . '' . $request->last_name], [
+                'user_id' => $user->id,
+                'path' => 'uploads/avatar',
+                'name' => $request->first_name . '' . $request->last_name,
+                'extension' => $fileAvatar->getClientOriginalExtension()
+            ]);
+            $path = $fileAvatar->move('uploads/avatar', $fileAvatarName);
+        }
+        if ($res) {
+            return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');
+        }
+        return redirect()->back()->with('error', 'Cập nhật thông tin thất bại');
     }
 
     /**

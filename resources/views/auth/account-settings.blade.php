@@ -6,14 +6,17 @@
     <section class="profile-content grid">
         <div class="wrapper">
             <div class="title">
-                <div class="title-account">Tài khoản</div>
-                <p class="title-info"><span class="fullname"><b>{{ $fullname }}</b>, <span
-                            class="email">{{ $dataUser->email }}</span></span></p>
+                <div class="title-account">Quản lý tài khoản</div>
+                <p class="title-info">
+                    <span class="fullname">{{ $dataUser->username }} - </span>
+                    <span class="email">{{ $dataUser->email }}</span>
+                    </span>
+                </p>
             </div>
 
             <ul class="settings">
                 <li class="settings-item">
-                    <a href="{{ route('profile.edit') }}" class="settings-item-link">
+                    <a href="{{ route('profile.edit', ['user' => $dataUser]) }}" class="settings-item-link">
                         <div class="icon">
                             <svg xmlns="http://www.w3.org/2000/svg" height="30px"
                                 viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->

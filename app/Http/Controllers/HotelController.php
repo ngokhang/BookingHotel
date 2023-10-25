@@ -13,6 +13,7 @@ class HotelController extends Controller
     public function edit(Hotel $hotel)
     {
         $hotelInfo = $hotel;
+        $this->authorize('view', $hotelInfo);
         return view('owner.edit-hotel', compact('hotelInfo'));
     }
 

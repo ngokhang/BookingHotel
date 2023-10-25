@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -59,12 +60,14 @@ class RegisterController extends Controller
         }
 
         $user = new User();
+        $userInfo = new UserInfo();
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
         $user->email = '';
-        $user->email_verified_at = now();
-        $user->remember_token = '';
+
         $user->save();
+        $userInfo->user_id = $user->id;
+        $userInfo->save();
 
         return redirect()->route('login.create')->with('success', 'Đăng ký thành công');
     }

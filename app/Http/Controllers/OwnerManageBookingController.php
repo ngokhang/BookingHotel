@@ -22,8 +22,8 @@ class OwnerManageBookingController extends Controller
     {
         $user = User::with(['hotels' => function ($query) {
             return $query->withTrashed();
-        }])->where('id', 6)->first(); // Lấy thông tin của user
-        return view('owner.owner_manage', compact('user')); // Truyền biến "$user" vào view
+        }])->where('id', Auth::user()->id)->first(); // Lấy thông tin của user
+        return view('owner.owner_manage', compact('user')); // Truyền biến "$user" vào view\
     }
 
     /**

@@ -6,7 +6,7 @@
     <div class="wrapper container">
         <section id="form-update">
             <x-alert-errors />
-            <form action="{{ route('profile.update', ['id' => $dataUser->id]) }}" method="POST" id="form"
+            <form action="{{ route('profile.update', ['user' => $dataUser]) }}" method="POST" id="form"
                 enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
@@ -17,12 +17,12 @@
                 <div class="form-input">
                     <label for="first_name">Firstname</label>
                     <input type="text" name="first_name" id="first_name" placeholder="Firstname"
-                        value="{{ $dataUser->userInfo->first_name }}" />
+                        value="{{ $dataUser->userInfo->first_name ?? '' }}" />
                 </div>
                 <div class="form-input">
                     <label for="last_name">Lastname</label>
                     <input type="text" name="last_name" id="last_name" placeholder="Lastname"
-                        value="{{ $dataUser->userInfo->last_name }}">
+                        value="{{ $dataUser->userInfo->last_name ?? '' }}">
                 </div>
                 <div class="form-input">
                     <label for="email">Email</label>
@@ -31,16 +31,16 @@
                 <div class="form-input">
                     <label for="phone_number">Telephone</label>
                     <input type="text" name="phone_number" id="phone_number" placeholder="Telephone"
-                        value="{{ $dataUser->userInfo->phone_number }}">
+                        value="{{ $dataUser->userInfo->phone_number ?? '' }}">
                 </div>
                 <div class="form-input">
                     <label for="address">Address</label>
                     <input type="text" name="address" id="address" placeholder="Address"
-                        value="{{ $dataUser->userInfo->address }}">
+                        value="{{ $dataUser->userInfo->address ?? '' }}">
                 </div>
                 <div class="form-input">
                     <label for="dob">Birthday</label>
-                    <input type="date" name="dob" id="dob" value="{{ $dataUser->userInfo->dob }}">
+                    <input type="date" name="dob" id="dob" value="{{ $dataUser->userInfo->dob ?? '' }}">
                 </div>
                 <div class="form-input input-file">
                     <label for="avatar">Avatar</label>

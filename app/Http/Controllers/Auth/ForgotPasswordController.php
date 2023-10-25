@@ -49,9 +49,9 @@ class ForgotPasswordController extends Controller
                 ['email' => $user->email, 'token' => $ott, 'expired_at' => Carbon::now()->addMinutes(15)]
             );
             Mail::to($user)->send(new ResetPasswordMail($user->username, $ott, $user->email));
-            return redirect()->back()->with('success', "The code has sent");
+            return redirect()->back()->with('success', "Mã xác minh đã được gửi đến mail của bạn");
         }
-        return redirect()->back()->with('error', "Your email doesn't match with record or not existed");
+        return redirect()->back()->with('error', "Email không tồn tại trong hệ thống");
     }
 
     /**

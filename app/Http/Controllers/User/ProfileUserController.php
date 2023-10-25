@@ -9,25 +9,23 @@ use App\Models\ProfileUser;
 use App\Models\User;
 use App\Models\UserInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileUserController extends Controller
 {
     public function index()
     {
-        $user = User::with(['userInfo', 'avatar'])->where('id', 1)->first();
+        $user = User::with(['userInfo', 'avatar'])->where('id', Auth::user()->id)->first();
         $avatar = $user->avatar ? $user->avatar->name . '.' . $user->avatar->extension : 'not_upload';
-        $fullname = $user->userInfo->first_name . ' ' . $user->userInfo->last_name;
-        return view('auth.account-settings', ['dataUser' => $user, 'fullname' => $fullname, 'avatar' => $avatar]);
-        return User::with(['userInfo', 'avatar'])->where('id', 1)->first();
+        return view('auth.account-settings', ['dataUser' => $user, 'avatar' => $avatar]);
     }
 
-    public function edit(Request $request)
+    public function edit(User $user)
     {
-        //
-        $user = User::with(['userInfo', 'avatar'])->where('id', 1)->first();
+        $this->authorize('view', $user);
+        $user->load(['userInfo', 'avatar'])->first();
         $avatar = $user->avatar ? $user->avatar->name . '.' . $user->avatar->extension : 'not_upload';
-        $fullname = $user->userInfo->first_name . ' ' . $user->userInfo->last_name;
-        return view('auth.personal-info', ['dataUser' => $user, 'fullname' => $fullname, 'avatar' => $avatar]);
+        return view('auth.personal-info', ['dataUser' => $user, 'avatar' => $avatar]);
     }
 
     /**
@@ -37,21 +35,22 @@ class ProfileUserController extends Controller
      * @param  \App\Models\ProfileUser  $profileUser
      * @return \Illuminate\Http\Response
      */
-    public function update(ProfileUserRequest $request, $id)
+    public function update(ProfileUserRequest $request, User $user)
     {
-        $res = UserInfo::updateOrCreate(['user_id' => $id], [
+        $this->authorize('update', $user);
+        $res = UserInfo::updateOrCreate(['user_id' => $user->id], [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'phone_number' => $request->phone_number,
             'dob' => $request->dob,
             'address' => $request->address
         ]);
-        User::where('id', $id)->update(['email' => $request->email]);
+        $user->update(['email' => $request->email]);
         $fileAvatar = $request->file('avatar');
         if ($fileAvatar) {
             $fileAvatarName = implode('', array($request->first_name, $request->last_name)) . '.' . $fileAvatar->getClientOriginalExtension();
             Avatar::updateOrCreate(['name' => $request->first_name . '' . $request->last_name], [
-                'user_id' => $id,
+                'user_id' => $user->id,
                 'path' => 'uploads/avatar',
                 'name' => $request->first_name . '' . $request->last_name,
                 'extension' => $fileAvatar->getClientOriginalExtension()
