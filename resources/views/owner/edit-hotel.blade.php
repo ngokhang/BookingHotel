@@ -5,6 +5,9 @@
         <div class="sidebar-owner">
             <h2>HOTEL DASHBOARD</h2>
             <div class="sidebar-owner__item">
+                <a href="{{ route('owner.dashboard') }}" class="sidebar-owner__link">Trang chủ</a>
+            </div>
+            <div class="sidebar-owner__item">
                 <a href="{{ route('owner_manage.index') }}" class="sidebar-owner__link">Quản lý khách sạn</a>
             </div>
             <div class="sidebar-owner__item">
@@ -17,14 +20,15 @@
                 <a href="{{ route('owner.edit') }}" class="sidebar-owner__link">Thay đổi mật khẩu</a>
             </div>
             <div class="owner-logout">
-                <a href="#" class="sidebar-owner__link">Đăng xuất</a>
+                <a href="{{ route('logout') }}" class="sidebar-owner__link">Đăng xuất</a>
             </div>
         </div>
 
         <div class="table-owner">
             <h3>Chỉnh sửa thông tin khách sạn</h3>
             @isset($hotelInfo)
-                <form action="{{ route('hotel.update', ['hotel' => $hotelInfo->id]) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('hotel.update', ['hotel' => $hotelInfo->id]) }}" method="POST"
+                    enctype="multipart/form-data">
                 @endisset
                 @method('PUT')
                 @csrf

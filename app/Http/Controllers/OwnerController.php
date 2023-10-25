@@ -9,7 +9,6 @@ use App\Models\Avatar;
 use App\Models\User;
 use App\Models\UserInfo;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class OwnerController extends Controller
 {

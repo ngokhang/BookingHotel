@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileUserRequest extends FormRequest
 {
@@ -23,7 +24,7 @@ class ProfileUserRequest extends FormRequest
      */
     public function rules()
     {
-        $userId = 9;
+        $userId = Auth::user()->id;
         return [
             //
             'first_name' => 'required|string|max:255|min:2',
@@ -49,6 +50,7 @@ class ProfileUserRequest extends FormRequest
 
             'email.required' => 'Vui lòng nhập email',
             'email.max' => 'Độ dài email vượt quá độ dài cho phép',
+            'email.unique' => 'Email đã có người sử dụng',
 
             'profile_address.max' => 'Độ dài địa chỉ không hợp lệ',
             'profile_address.min' => 'Độ dài địa chỉ không hợp lệ',

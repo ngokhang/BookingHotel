@@ -1,15 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ResetPasswordRequest;
-use App\Models\PasswordReset;
-use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class NewPasswordController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +13,7 @@ class NewPasswordController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.dashboard');
     }
 
     /**
@@ -50,7 +45,6 @@ class NewPasswordController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -59,10 +53,9 @@ class NewPasswordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($token)
+    public function edit($id)
     {
         //
-        return view('auth.reset-password', ['token' => $token]);
     }
 
     /**
@@ -72,30 +65,9 @@ class NewPasswordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ResetPasswordRequest $request, $email)
+    public function update(Request $request, $id)
     {
-        $tokenExisted = PasswordReset::where('email', $email)->first();
-        $token = $tokenExisted->token;
-        $expiredTime = Carbon::parse($tokenExisted->expired_at)->timestamp;
-        $currentTime = Carbon::now()->timestamp;
-
-        if ($currentTime > $expiredTime) {
-            return redirect()->route('forgot.create')->with('error', 'Mã xác minh đã hết hạn');
-        }
-
-        if ($request->token_reset != $token) {
-            return redirect()->back()->with('error', 'Mã xác minh không hợp lệ');
-        }
-
-        $email = $tokenExisted->email;
-        $newPassword = $request->new_password;
-        $user = User::where('email', $email)->first();
-        $user->password = bcrypt($newPassword);
-        $user->save();
-
-        $tokenExisted->delete();
-
-        return redirect()->route('login.create')->with('success', 'Cập nhật mật khẩu thành công');
+        //
     }
 
     /**

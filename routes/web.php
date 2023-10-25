@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -18,7 +19,7 @@ use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\OwnerManageBookingController;
 use App\Http\Controllers\OwnerPasswordController;
 use App\Http\Controllers\ApproveHotelController;
-
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,7 @@ Route::prefix('login')->group(function () {
     Route::get('/google/callback', [LoginController::class, 'callbackGoogle'])->name('login.google.callback');
 });
 
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::prefix('register')->group(function () {
     Route::get('/', [RegisterController::class, 'create'])->name('register.create');
@@ -66,17 +67,17 @@ Route::prefix('reset-password')->group(function () {
 
 
 /* Profile user route */
-Route::prefix('account')->group(function () {
+Route::prefix('account')->middleware(['auth'])->group(function () {
     // Personal info
     Route::get('/', [ProfileUserController::class, 'index'])->name('profile.index');
-    Route::get('/personal', [ProfileUserController::class, 'edit'])->name('profile.edit');
-    Route::put('personal/{id}', [ProfileUserController::class, 'update'])->name('profile.update');
+    Route::get('/personal/{user}', [ProfileUserController::class, 'edit'])->name('profile.edit');
+    Route::put('personal/{user}', [UserController::class, 'update'])->name('profile.update');
     // Password
     Route::get('/password', [PasswordController::class, 'edit'])->name('password.edit');
     Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
     // Booking
-    Route::get('/your-booking', [UserBookingController::class, 'index'])->withTrashed()->name('booking.index');
-    Route::delete('your-booking/{booking_id}', [UserBookingController::class, 'destroy'])->name('booking.destroy');
+    Route::get('/your-booking', [UserBookingController::class, 'index'])->withTrashed()->middleware(['role:user'])->name('booking.index');
+    Route::delete('your-booking/{booking_id}', [UserBookingController::class, 'destroy'])->middleware(['role:user'])->name('booking.destroy');
 });
 
 // Evalution hotel
@@ -95,7 +96,10 @@ Route::get('/booking/create/{hotel_id}', [UserBookingController::class, 'create'
 Route::post('/booking/store', [UserBookingController::class, 'store'])->name('booking.store');
 
 // Owner hotel - chu khach san
-Route::prefix('owner')->group(function () {
+Route::prefix('owner')->middleware(['role:owner'])->group(function () {
+    Route::get('/', function () {
+        return view('owner.dashboard', ['user' => Auth::user()]);
+    })->name('owner.dashboard');
     // trang đổi mật khẩu chủ khách sạn
     Route::get('/change-password', [OwnerPasswordController::class, 'edit'])->name('owner.edit');
     // trang chỉnh sửa thông tin khách sạn
@@ -125,7 +129,10 @@ Route::prefix('owner')->group(function () {
 
 // require __DIR__ . './admin.php';
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
     // localhost:8000/admin/owner
     Route::prefix('owner')->group(function () {
         // Lấy danh sách của tất cả chủ khách sạn
@@ -153,5 +160,4 @@ Route::prefix('admin')->group(function () {
         // Xoa
         Route::delete('/{user}', [UserController::class, 'destroy'])->name('admin_user.delete');
     });
-
 });

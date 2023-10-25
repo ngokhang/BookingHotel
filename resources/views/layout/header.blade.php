@@ -66,15 +66,32 @@
             <div class="header-infor-user">
                 <div class="info-user">
                     <i class="fas fa-bars" style="color: #06070a"></i>
-                    <i class="fas fa-user-circle" style="color: #717171"></i>
+                    @auth
+                        {{-- <img src="{{ asset('uploads/avatar/' . $avatar) }}" alt=""> --}}
+                    @endauth
+                    @guest
+                        <i class="fas fa-user-circle" style="color: #717171"></i>
+                    @endguest
                 </div>
-                <div class="menu-acount">
-                    <ul class="menu-acount_list">
-                        <li class="menu-acount_item"><a href={{ route('register.create') }}>Đăng ký</a></li>
-                        <li class="menu-acount_item"><a href={{ route('login.create') }}>Đăng nhập</a></li>
-                        <li class="menu-acount_item"><a href="#">Trợ giúp</a></li>
-                    </ul>
-                </div>
+
+                @auth
+                    <div class="menu-acount">
+                        <ul class="menu-acount_list">
+                            <li class="menu-acount_item"><a href={{ route('profile.index') }}>Tài khoản</a></li>
+                            <li class="menu-acount_item"><a href={{ route('logout') }}>Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                @endauth
+
+                @guest
+                    <div class="menu-acount">
+                        <ul class="menu-acount_list">
+                            <li class="menu-acount_item"><a href={{ route('register.create') }}>Đăng ký</a></li>
+                            <li class="menu-acount_item"><a href={{ route('login.create') }}>Đăng nhập</a></li>
+                            <li class="menu-acount_item"><a href="#">Trợ giúp</a></li>
+                        </ul>
+                    </div>
+                @endguest
             </div>
         </div>
     </header>

@@ -48,7 +48,9 @@ class LoginController extends Controller
         }
 
         if (auth()->attempt(['username' => $request->username, 'password' => $request->password])) {
-            return redirect()->route('home')->with('success', 'Đăng nhập thành công');
+            if (auth()->user()->role === 'user') return redirect()->route('home')->with('success', 'Đăng nhập thành công');
+            if (auth()->user()->role === 'admin') return redirect()->route('admin.dashboard')->with('success', 'Đăng nhập thành công');
+            if (auth()->user()->role === 'owner') return redirect()->route('owner.dashboard')->with('success', 'Đăng nhập thành công');
         } else {
             return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
         }

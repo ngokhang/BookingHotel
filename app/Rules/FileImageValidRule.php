@@ -19,7 +19,7 @@ class FileImageValidRule implements Rule
     private function isValidImage($file)
     {
         // dd($file->getSize() <= 1024 * 1024);
-        return $file->isValid() && in_array($file->extension(), ['jpg', 'jpeg', 'png', 'gif', 'bmp']) && $file->getSize() <= 1024 * 1024;
+        return $file->isValid() && in_array($file->extension(), ['jpg', 'jpeg', 'png', 'gif', 'bmp']) && $file->getSize() <= (1024 * 1024 * 1024 * 1024);
     }
 
     /**
