@@ -9,7 +9,7 @@ class ApproveHotelController extends Controller
 {
     public function index()
     {
-        $unapprovedHotels = Hotel::where('admin_accepted', false)->get();
+        $unapprovedHotels = Hotel::where('admin_accepted', false)->paginate(10);
         return view('admin.admin_manage-hotel', compact('unapprovedHotels'));
     }
 
