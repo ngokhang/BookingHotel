@@ -13,7 +13,8 @@ class BookingListController extends Controller
             return $query->where('owner_id', Auth::user()->id)->withTrashed();
         }])->withTrashed()->paginate(10);
 
-        return view('owner.booking-list', compact('bookingPendingList'));
-        // return $bookingPendingList;
+        return view('owner.booking-list', compact('bookingPendingList'), [
+            'user' => Auth::user()
+        ]);
     }
 }

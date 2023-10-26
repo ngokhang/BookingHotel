@@ -18,11 +18,11 @@
             </div>
         </div>
 
-        <div class="info_hotel-img">
-            <div class="info_hotel-img--half-left">
+        <div class="info_hotel-img-list">
+            <div class="info_hotel-img half-left">
                 <img src="/{{ $hotel->image1 }}" alt="">
             </div>
-            <div class="info_hotel-img--half-right">
+            <div class="info_hotel-img half-right">
                 <img src="/{{ $hotel->image2 }}" alt="">
                 <img src="/{{ $hotel->image3 }}" alt="">
             </div>
