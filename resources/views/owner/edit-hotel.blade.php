@@ -1,6 +1,7 @@
 @extends('layout.owner')
 
 @section('content')
+    <x-alert-errors />
     <div class="container-owner">
         <div class="sidebar-owner">
             <h2>HOTEL DASHBOARD</h2>
@@ -82,15 +83,5 @@
                 <button type="submit" class="btn btn-submit">Lưu thay đổi</button>
             </form>
         </div>
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
     </div>
 @endsection

@@ -39,7 +39,7 @@
                 </thead>
                 <tbody>
                     @foreach ($bookingPendingList as $booking)
-                        @if ($booking->hotel != null)
+                        @if ($booking->hotel != null && $booking->accepted != 2)
                             <tr>
                                 <td>{{ $booking->id }}</td>
                                 <td>{{ $booking->hotel->name }}</td>
