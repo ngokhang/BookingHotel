@@ -19,6 +19,7 @@ use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\OwnerManageBookingController;
 use App\Http\Controllers\OwnerPasswordController;
 use App\Http\Controllers\ApproveHotelController;
+use App\Http\Controllers\HotelFavoriteController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -86,6 +87,10 @@ Route::get('/hotel/{id}', [HotelController::class, 'show'])->withTrashed()->name
 //trang đặt phòng
 Route::get('/booking/create/{hotel_id}', [UserBookingController::class, 'create'])->name('booking.create');
 Route::post('/booking/store', [UserBookingController::class, 'store'])->middleware(['auth', 'role:user'])->name('booking.store');
+
+Route::get('/favorites', [HotelFavoriteController::class, 'index'])->middleware(['auth', 'role:user'])->name('user.favorite_hotel');
+Route::post('/favorite/{hotel_id}', [HotelFavoriteController::class, 'store'])->name('favorite_hotel.store');
+Route::delete('/favorites/{hotel_id}', [HotelFavoriteController::class, 'destroy'])->middleware(['auth', 'role:user'])->name('favorite_hotel.destroy');
 
 // Owner hotel - chu khach san
 Route::prefix('owner')->middleware(['role:owner'])->group(function () {

@@ -46,4 +46,9 @@ class Hotel extends Model
     {
         return $this->hasMany(Booking::class);
     }
+
+    public function favoriteUsers()
+    {
+        return $this->belongsToMany(User::class, 'hotel_favorites', 'user_id');
+    }
 }

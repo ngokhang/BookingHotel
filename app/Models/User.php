@@ -66,4 +66,9 @@ class User extends Authenticatable implements Authorizable
     {
         return $this->hasMany(Hotel::class, 'owner_id');
     }
+
+    public function favoritesHotels()
+    {
+        return $this->belongsToMany(Hotel::class, 'hotel_favorites', 'hotel_id');
+    }
 }
