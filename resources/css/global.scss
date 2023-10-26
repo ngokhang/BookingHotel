@@ -9,10 +9,10 @@
   color: red;
 }
 
-img {
-  display: block;
-  width: 100%;
-}
+// img {
+//   display: block;
+//   width: 100%;
+// }
 
 .pagination {
   display: flex;
@@ -21,13 +21,13 @@ img {
   margin: 20px 0;
   ul {
     li a, span {
-      display: inline-block;
+      // display: inline-block;
       width: 20px;
       font-size: 20px;
       line-height: 1.25;
     }
     .active {
-      color: chocolate;
+      color: #ff385c;
     }
   }
 }

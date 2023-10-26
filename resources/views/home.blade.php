@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout.app')
 
-<head>
-    @include('head')
-</head>
-
-<body>
-    @include('layout.header')
-    @include('sweetalert::alert')
-
+@section('content')
     <div class="container grid">
         <div class="hotel-main-list">
             @foreach ($hotels as $hotel)
@@ -43,13 +35,11 @@
             @endforeach
 
             <div class="hotel-main-more">
-                <h4>Tiếp tục khám phá danh mục tuyệt vời</h4>
-                <button class="button-hotel-more">Hiển thị thêm</button>
+                <h4>Tiếp tục khám phá địa điểm tuyệt vời</h4>
+                <div class="pagination">
+                    {{ $hotels->links('vendor.pagination.default') }}
+                </div>
             </div>
         </div>
     </div>
-
-    @include('layout.footer')
-</body>
-
-</html>
+@endsection

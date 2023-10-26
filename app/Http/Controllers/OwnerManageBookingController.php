@@ -33,7 +33,9 @@ class OwnerManageBookingController extends Controller
      */
     public function create()
     {
-        return view('owner.add-hotel');
+        return view('owner.add-hotel', [
+            'user' => Auth::user()
+        ]);
     }
 
     /**
