@@ -140,10 +140,14 @@ class HotelController extends Controller
     public function show($id)
     {
         $hotel = Hotel::withTrashed()->where('id', $id)->first(); // Lấy thông tin của khách sạn dựa trên $id
-        if (!$hotel) {
-            return abort(404);
+        // if (!$hotel) {
+        //     return abort(404);
+        // }
+        if (Auth::check()) {
+            $hotel->load(['favoriteUsers'])->where('id', Auth::user()->id)->firstOrFail();
         }
 
         return view('user.hotel', compact('hotel'));
+        // return $hotel;
     }
 }

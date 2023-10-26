@@ -7,7 +7,26 @@
             <div class="info_hotel-tasks">
                 <p>{{ $hotel->city }}, {{ $hotel->country }}</p>
                 <div>
-                    <span>Thêm yêu thích <i class="far fa-heart"></i></span>
+                    @auth
+                        @if (count($hotel->favoriteUsers) > 0 && $hotel->favoriteUsers[0]->id === auth()->user()->id)
+                            <a href="#">Đã yêu thích</a>
+                        @else
+                            <form action="{{ route('favorite_hotel.store', ['hotel_id' => $hotel->id]) }}" method="post">
+                                @csrf
+                                <button>
+                                    <a>Thêm yêu thích <i class="far fa-heart"></i></a>
+                                </button>
+                            </form>
+                        @endif
+                    @endauth
+                    @guest
+                        <form action="{{ route('favorite_hotel.store', ['hotel_id' => $hotel->id]) }}" method="post">
+                            @csrf
+                            <button>
+                                <a>Thêm yêu thích <i class="far fa-heart"></i></a>
+                            </button>
+                        </form>
+                    @endguest
                     <span>Chia sẻ <i class="far fa-share-square"></i></span>
                     @if ($hotel->deleted_at == null)
                         <a href="{{ route('booking.create', ['hotel_id' => $hotel->id]) }}">Đặt phòng</a>

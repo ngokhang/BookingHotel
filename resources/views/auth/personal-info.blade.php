@@ -14,40 +14,50 @@
                 <div class="form-title">
                     <h4>Thông tin cá nhân</h4>
                 </div>
-                <div class="form-input">
-                    <label for="first_name">Họ</label>
-                    <input type="text" name="first_name" id="first_name" placeholder="Firstname"
-                        value="{{ $dataUser->userInfo->first_name ?? '' }}" />
+                <div class="form-content" style="display: flex; gap: 10px">
+                    <div style="display: flex; flex-direction: column; gap: 20px; flex:40%">
+                        <div class="form-input">
+                            <label for="first_name">Họ</label>
+                            <input type="text" name="first_name" id="first_name" placeholder="Firstname"
+                                value="{{ $dataUser->userInfo->first_name ?? '' }}" />
+                        </div>
+                        <div class="form-input">
+                            <label for="last_name">Tên</label>
+                            <input type="text" name="last_name" id="last_name" placeholder="Lastname"
+                                value="{{ $dataUser->userInfo->last_name ?? '' }}">
+                        </div>
+                        <div class="form-input">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" placeholder="Email"
+                                value="{{ $dataUser->email }}">
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 20px; flex:40%">
+                        <div class="form-input">
+                            <label for="phone_number">Số điện thoại</label>
+                            <input type="text" name="phone_number" id="phone_number" placeholder="Telephone"
+                                value="{{ $dataUser->userInfo->phone_number ?? '' }}">
+                        </div>
+                        <div class="form-input">
+                            <label for="address">Địa chỉ</label>
+                            <input type="text" name="address" id="address" placeholder="Address"
+                                value="{{ $dataUser->userInfo->address ?? '' }}">
+                        </div>
+                        <div class="form-input">
+                            <label for="dob">Ngày sinh</label>
+                            <input type="date" name="dob" id="dob"
+                                value="{{ $dataUser->userInfo->dob ?? '' }}">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-input">
-                    <label for="last_name">Tên</label>
-                    <input type="text" name="last_name" id="last_name" placeholder="Lastname"
-                        value="{{ $dataUser->userInfo->last_name ?? '' }}">
-                </div>
-                <div class="form-input">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="Email" value="{{ $dataUser->email }}">
-                </div>
-                <div class="form-input">
-                    <label for="phone_number">Số điện thoại</label>
-                    <input type="text" name="phone_number" id="phone_number" placeholder="Telephone"
-                        value="{{ $dataUser->userInfo->phone_number ?? '' }}">
-                </div>
-                <div class="form-input">
-                    <label for="address">Địa chỉ</label>
-                    <input type="text" name="address" id="address" placeholder="Address"
-                        value="{{ $dataUser->userInfo->address ?? '' }}">
-                </div>
-                <div class="form-input">
-                    <label for="dob">Ngày sinh</label>
-                    <input type="date" name="dob" id="dob" value="{{ $dataUser->userInfo->dob ?? '' }}">
-                </div>
-                <div class="form-input input-file">
-                    <label for="avatar">Ảnh đại diện</label>
-                    <input type="file" name="avatar" id="avatar">
-                </div>
-                <div class="preview-img">
-                    <img src="{{ asset('uploads/avatar/' . $avatar) }}" alt="Ảnh người dùng">
+                <div style="display: flex; flex-direction: column; gap: 20px">
+                    <div class="form-input input-file">
+                        <label for="avatar">Ảnh đại diện</label>
+                        <input type="file" name="avatar" id="avatar">
+                    </div>
+                    <div class="preview-img">
+                        <img src="{{ asset('uploads/avatar/' . $avatar) }}" alt="Ảnh người dùng">
+                    </div>
                 </div>
                 <div class="form-btn">
                     <button class="button-submit">Cập nhật</button>

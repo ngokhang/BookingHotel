@@ -23,7 +23,7 @@
                 <a href="{{ route('logout') }}" class="sidebar-owner__link">Đăng xuất</a>
             </div>
         </div>
-        
+
         <div class="table-owner">
             <h3>Danh sách khách sạn</h3>
             <table>
@@ -43,9 +43,6 @@
                             <td>{{ $hotel->id }}</td>
                             <td>{{ $hotel->name }}</td>
                             <td>{{ $hotel->city }}, {{ $hotel->country }}</td>
-                            @if ($hotel->admin_accepted == true && $hotel->deleted_at)
-                                <td>Đang cho thuê</td>
-                            @endif
                             @if ($hotel->admin_accepted == false && !$hotel->deleted_at)
                                 <td>Chưa được đăng bài</td>
                             @endif

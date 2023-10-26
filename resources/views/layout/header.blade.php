@@ -77,6 +77,8 @@
                         <ul class="menu-acount_list">
                             <li class="menu-acount_item"><a href={{ route('profile.index') }}>Tài khoản</a></li>
                             <li class="menu-acount_item"><a href={{ route('logout') }}>Đăng xuất</a></li>
+                            <li class="menu-acount_item"><a href={{ route('user.favorite_hotel') }}>Danh sách yêu thích</a>
+                            </li>
                         </ul>
                     </div>
                 @endauth
