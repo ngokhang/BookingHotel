@@ -27,14 +27,14 @@ class HotelRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', new StringValidRule("Tên khách sạn"), 'unique:hotels,name'],
+            'name' => ['required', new StringValidRule("Tên khách sạn")],
             'city' => ['required', new StringValidRule("Thành phố")],
             'country' => ['required_with:city', new StringValidRule("Quốc gia")],
             'description' => 'required|string|max:2500|min:2',
             'check_in_date' => 'required|date',
             'price' => ['required', new UnsignedIntRule(0, "Giá thuê")],
             'num_guest' => ['required', new UnsignedIntRule(0, "Số lượng khách")],
-            'image' => ['required', 'array', new FileImageValidRule]
+            'image' => ['array', new FileImageValidRule]
         ];
     }
 

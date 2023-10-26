@@ -15,8 +15,10 @@ class HotelController extends Controller
     public function edit(Hotel $hotel)
     {
         $hotelInfo = $hotel;
+        $user = Auth::user();
         $this->authorize('view', $hotelInfo);
-        return view('owner.edit-hotel', compact('hotelInfo'));
+        return view('owner.edit-hotel', compact('hotelInfo', 'user'));
+        // return $hotel;
     }
 
     public function update(HotelRequest $request, Hotel $hotel)
@@ -24,7 +26,7 @@ class HotelController extends Controller
         // Đảm bảo rằng biến $hotelInfo đã được truyền vào view
         $hotelInfo = $hotel;
 
-        $ownerId = 6;
+        $ownerId = Auth::user()->id;
 
         // Nếu người dùng đã tải lên hình ảnh
         if ($request->hasFile('image')) {
