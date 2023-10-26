@@ -52,6 +52,13 @@
                                         {{-- <input type="hidden" name="admin_accepted" value="true"> <!-- Thêm trường này --> --}}
                                         <button type="submit" class="btn btn-primary">Accept</button>
                                     </form>
+                                    <form action="{{ route('admin.delete_hotel', ['hotel' => $hotel]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        {{-- <input type="hidden" name="admin_accepted" value="true"> <!-- Thêm trường này --> --}}
+                                        <button type="submit" class="btn btn-primary"
+                                            style="background-color: red">Decline</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
