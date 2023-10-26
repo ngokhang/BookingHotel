@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hotel;
+use Exception;
 use Illuminate\Http\Request;
 
 class ApproveHotelController extends Controller
@@ -17,5 +18,15 @@ class ApproveHotelController extends Controller
     {
         $hotel->update(['admin_accepted' => true]);
         return redirect()->route('admin.approve_hotels')->with('success', 'Khách sạn đã được duyệt.');
+    }
+
+    public function destroy(Hotel $hotel)
+    {
+        try {
+            $hotel->forceDelete();
+            return redirect()->back()->with('success', 'Bạn đã từ chối bài đăng');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Từ chối đăng bài thất bại');
+        }
     }
 }

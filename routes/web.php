@@ -138,6 +138,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/approve-hotels', [ApproveHotelController::class, 'index'])->name('admin.approve_hotels');
         //duyệt khách sạn
         Route::put('/approve-hotel/{hotel}', [ApproveHotelController::class, 'approve'])->name('admin.approve_hotel');
+        Route::delete('/{hotel}', [ApproveHotelController::class, 'destroy'])->name('admin.delete_hotel');
     });
     // quản lý người dùng
     Route::prefix('user')->group(function () {
