@@ -144,7 +144,7 @@ class HotelController extends Controller
         //     return abort(404);
         // }
         if (Auth::check()) {
-            $hotel->load(['favoriteUsers'])->where('id', Auth::user()->id)->firstOrFail();
+            $hotel->load(['favoriteUsers'])->where('id', Auth::user()->id)->get();
         }
 
         return view('user.hotel', compact('hotel'));

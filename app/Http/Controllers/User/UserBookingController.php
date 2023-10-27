@@ -8,6 +8,7 @@ use App\Http\Requests\EvaluationRequest;
 use App\Models\Evaluation;
 use App\Models\Hotel;
 use App\Models\Booking;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +39,7 @@ class UserBookingController extends Controller
      */
     public function create($hotel_id)
     {
-        $hotel = Hotel::findOrFail($hotel_id);
+        $hotel = Hotel::withTrashed()->where('id', $hotel_id)->first();
         return view('user.booking-create', compact('hotel'));
     }
 
@@ -70,7 +71,10 @@ class UserBookingController extends Controller
         }
 
         // Tính toán tổng số tiền phải trả
-        $hotel = Hotel::findOrFail($hotel_id);
+        $hotel = Hotel::withTrashed()->where('id', $hotel_id)->first();
+        if ($hotel->deleted_at != null && $hotel) {
+            return redirect()->back()->with('error', 'Khách sạn đã cho thuê');
+        }
         $pricePerNight = $hotel->price;
         $checkIn = new DateTime($check_in_date);
         $checkOut = new DateTime($check_out_date);
@@ -89,6 +93,8 @@ class UserBookingController extends Controller
         $booking->num_people = $num_guests;
         $booking->total_cost = $totalCost;
         $booking->user_id = $user_id;
+        $booking->accepted = 1;
+        $hotel->delete();
         $booking->save();
 
         return redirect()->back()->with('success', 'Đặt phòng thành công!');
