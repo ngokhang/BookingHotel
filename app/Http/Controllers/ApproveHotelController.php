@@ -24,9 +24,9 @@ class ApproveHotelController extends Controller
     {
         try {
             $hotel->forceDelete();
-            return redirect()->back()->with('success', 'Bạn đã từ chối bài đăng');
+            return redirect()->back()->with('success', 'Bạn đã từ chối yêu cầu');
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Từ chối đăng bài thất bại');
+            return redirect()->back()->with('error', 'Từ chối yêu cầu thất bại');
         }
     }
 }

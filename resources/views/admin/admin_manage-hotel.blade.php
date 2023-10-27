@@ -65,7 +65,7 @@
                     </tbody>
                 </table>
             @else
-                <p>Không có khách sạn nào chưa được duyệt.</p>
+                {{-- <p>Không có khách sạn nào chưa được duyệt.</p> --}}
             @endif
         </div>
     </div>

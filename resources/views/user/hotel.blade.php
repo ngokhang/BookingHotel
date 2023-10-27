@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="container grid">
+    <div class="container grid ">
         <div class="info_hotel-name">
             <h2>{{ $hotel->name }}</h2>
             <div class="info_hotel-tasks">
@@ -10,7 +10,7 @@
                     <span>Thêm yêu thích <i class="far fa-heart"></i></span>
                     <span>Chia sẻ <i class="far fa-share-square"></i></span>
                     @if ($hotel->deleted_at == null)
-                        <a href="{{ route('booking.create', ['hotel_id' => $hotel->id]) }}">Đặt phòng</a>
+                        <a href="{{ route('booking.create', ['hotel_id' => $hotel->id]) }}">Đặt thuê</a>
                     @else
                         <a href="#">Đã cho thuê</a>
                     @endif
