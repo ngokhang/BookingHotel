@@ -2166,6 +2166,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 __webpack_require__(/*! ./slider */ "./resources/js/slider.js");
 __webpack_require__(/*! ./manage-booking */ "./resources/js/manage-booking.js");
 __webpack_require__(/*! ./booking */ "./resources/js/booking.js");
+__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './custom_interface'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 /***/ }),
 

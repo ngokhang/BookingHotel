@@ -28,5 +28,6 @@ function calculateTotalCost() {
             errorMessage.textContent = "";
             totalCostInput.value = (pricePerNight * days).toFixed(0);
         }
+
     }
 }

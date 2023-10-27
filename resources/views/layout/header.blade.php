@@ -56,12 +56,8 @@
                 </ul>
             </div>
         </form>
-        {{-- thông tin --}}
+        {{-- thông tin tài khoản --}}
         <div class="header-info">
-            <div class="header-info_web">
-                <a href="#">Liên hệ qua Airbnb</a>
-                <i class="fas fa-globe-europe" style="color: #333333"></i>
-            </div>
             <div class="header-infor-user">
                 <div class="info-user">
                     <i class="fas fa-bars" style="color: #06070a"></i>
